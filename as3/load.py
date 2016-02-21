@@ -45,8 +45,8 @@ def shuffle_data():
     pos_path is where you save positive review data.
     neg_path is where you save negative review data.
     '''
-    pos_path = "/Users/drosen/Dropbox/share/ML1003-share/Homework/hw3-sentiment-analysis/release/data/neg"
-    neg_path = 
+    pos_path = "/Users/cryan/Desktop/1003/github/as3/data/neg"
+    neg_path = "/Users/cryan/Desktop/1003/github/as3/data/pos"
 	
     pos_review = folder_list(pos_path,1)
     neg_review = folder_list(neg_path,-1)
