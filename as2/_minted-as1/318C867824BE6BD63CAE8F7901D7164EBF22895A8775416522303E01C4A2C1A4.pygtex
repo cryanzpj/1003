@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{sum}\PYGdefault{p}{(}\PYGdefault{n}{theta\PYGdefaultZus{}true}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{10}\PYGdefault{p}{:,:]} \PYGdefault{o}{!=} \PYGdefault{n}{beta\PYGdefaultZus{}opt}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{10}\PYGdefault{p}{:,:])}
+\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}} \PYGdefault{l+m+mi}{2}
+\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}}\PYGdefault{n}{beta\PYGdefaultZus{}opt}\PYGdefault{p}{[:}\PYGdefault{l+m+mi}{10}\PYGdefault{p}{,:]}
+\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}}\PYGdefault{n}{array}\PYGdefault{p}{([[} \PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mf}{9.1941852} \PYGdefault{p}{],}
+\PYGdefault{n}{array}\PYGdefault{p}{([[}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mf}{9.92480386}\PYGdefault{p}{],}
+	\PYGdefault{p}{[}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mf}{9.7845817} \PYGdefault{p}{],}
+	\PYGdefault{p}{[} \PYGdefault{l+m+mf}{9.69160619}\PYGdefault{p}{],}
+	\PYGdefault{p}{[}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mf}{9.74515336}\PYGdefault{p}{],}
+	\PYGdefault{p}{[}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mf}{9.73290275}\PYGdefault{p}{],}
+	\PYGdefault{p}{[} \PYGdefault{l+m+mf}{9.6222794} \PYGdefault{p}{],}
+	\PYGdefault{p}{[}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mf}{9.81244892}\PYGdefault{p}{],}
+	\PYGdefault{p}{[}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mf}{9.81588341}\PYGdefault{p}{],}
+	\PYGdefault{p}{[} \PYGdefault{l+m+mf}{9.63381792}\PYGdefault{p}{],}
+	\PYGdefault{p}{[} \PYGdefault{l+m+mf}{9.78238686}\PYGdefault{p}{]])}
+\end{Verbatim}

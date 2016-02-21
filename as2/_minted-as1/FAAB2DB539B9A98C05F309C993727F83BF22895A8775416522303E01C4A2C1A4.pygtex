@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{n}{theta\PYGdefaultZus{}true} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{20}\PYGdefault{o}{*}\PYGdefault{n}{numpy}\PYGdefault{o}{.}\PYGdefault{n}{random}\PYGdefault{o}{.}\PYGdefault{n}{randint}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{2}\PYGdefault{p}{,}\PYGdefault{n}{size} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{)}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mi}{10}
+\PYGdefault{n}{theta\PYGdefaultZus{}true} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{([}\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{hstack}\PYGdefault{p}{((}\PYGdefault{n}{theta\PYGdefaultZus{}true}\PYGdefault{p}{,}\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{zeros}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{65}\PYGdefault{p}{)))])}\PYGdefault{o}{.}\PYGdefault{n}{T}
+\end{Verbatim}

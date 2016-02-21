@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{compute\PYGdefaultZus{}square\PYGdefaultZus{}loss\PYGdefaultZus{}gradient}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,} \PYGdefault{n}{y}\PYGdefault{p}{,} \PYGdefault{n}{theta}\PYGdefault{p}{):}
+	\PYGdefault{l+s+sd}{\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+\PYGdefault{l+s+sd}{	Compute gradient of the square loss (as defined in compute\PYGdefaultZus{}square\PYGdefaultZus{}loss),}
+\PYGdefault{l+s+sd}{	at the point theta.}
+
+\PYGdefault{l+s+sd}{	Args:}
+\PYGdefault{l+s+sd}{	X \PYGdefaultZhy{} the feature vector, 2D numpy array of size (num\PYGdefaultZus{}instances, num\PYGdefaultZus{}features)}
+\PYGdefault{l+s+sd}{	y \PYGdefaultZhy{} the label vector, 1D numpy array of size (num\PYGdefaultZus{}instances)}
+\PYGdefault{l+s+sd}{	theta \PYGdefaultZhy{} the parameter vector, 1D numpy array of size (num\PYGdefaultZus{}features)}
+
+\PYGdefault{l+s+sd}{	Returns:}
+\PYGdefault{l+s+sd}{	grad \PYGdefaultZhy{} gradient vector, 1D numpy array of size (num\PYGdefaultZus{}features)}
+\PYGdefault{l+s+sd}{	\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+	\PYGdefault{n}{m} \PYGdefault{o}{=} \PYGdefault{n}{X}\PYGdefault{o}{.}\PYGdefault{n}{shape}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{]} \PYGdefault{o}{*}\PYGdefault{l+m+mf}{1.0}
+	\PYGdefault{n}{theta} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{([}\PYGdefault{n}{theta}\PYGdefault{p}{])}\PYGdefault{o}{.}\PYGdefault{n}{T}
+	\PYGdefault{n}{y} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{([}\PYGdefault{n}{y}\PYGdefault{p}{])}\PYGdefault{o}{.}\PYGdefault{n}{T}
+
+	\PYGdefault{k}{return} \PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{/}\PYGdefault{n}{m} \PYGdefault{o}{*} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{dot}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{o}{.}\PYGdefault{n}{T}\PYGdefault{p}{,(}\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{dot}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,}\PYGdefault{n}{theta}\PYGdefault{p}{)} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{y}\PYGdefault{p}{))} \PYGdefault{p}{)[:,}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{]}
+\end{Verbatim}

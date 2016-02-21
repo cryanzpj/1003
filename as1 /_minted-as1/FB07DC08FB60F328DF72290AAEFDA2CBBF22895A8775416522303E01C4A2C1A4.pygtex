@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{step\PYGdefaultZus{}checker}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,} \PYGdefault{n}{y}\PYGdefault{p}{,} \PYGdefault{n}{alpha} \PYGdefault{o}{=} \PYGdefault{p}{[}\PYGdefault{l+m+mf}{0.1}\PYGdefault{p}{],} \PYGdefault{n}{num\PYGdefaultZus{}iter}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{1000}\PYGdefault{p}{):}
+	\PYGdefault{l+s+sd}{\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+\PYGdefault{l+s+sd}{	Comput the square loss objective function for given alpha values}
+
+\PYGdefault{l+s+sd}{	Args:}
+\PYGdefault{l+s+sd}{	X \PYGdefaultZhy{} the feature vector, 2D numpy array of size (num\PYGdefaultZus{}instances, num\PYGdefaultZus{}features)}
+\PYGdefault{l+s+sd}{	y \PYGdefaultZhy{} the label vector, 1D numpy array of size (num\PYGdefaultZus{}instances)}
+\PYGdefault{l+s+sd}{	alpha \PYGdefaultZhy{} step size in gradient descent}
+\PYGdefault{l+s+sd}{	num\PYGdefaultZus{}iter \PYGdefaultZhy{} number of iterations to run}
+
+\PYGdefault{l+s+sd}{	Returns:}
+\PYGdefault{l+s+sd}{	loss\PYGdefaultZus{}hist \PYGdefaultZhy{} the history of objective function vector,}
+\PYGdefault{l+s+sd}{	2D numpy array of size (len(alpha) ,num\PYGdefaultZus{}iter+1)}
+\PYGdefault{l+s+sd}{	\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+	\PYGdefault{n}{num\PYGdefaultZus{}alpha} \PYGdefault{o}{=} \PYGdefault{n+nb}{len}\PYGdefault{p}{(}\PYGdefault{n}{alpha}\PYGdefault{p}{)}
+	\PYGdefault{n}{loss\PYGdefaultZus{}hist}  \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{zeros}\PYGdefault{p}{((}\PYGdefault{n}{num\PYGdefaultZus{}alpha}\PYGdefault{p}{,} \PYGdefault{l+m+mi}{1001}\PYGdefault{p}{))}
+	\PYGdefault{k}{for} \PYGdefault{n}{i} \PYGdefault{o+ow}{in} \PYGdefault{n+nb}{list}\PYGdefault{p}{(}\PYGdefault{n+nb}{xrange}\PYGdefault{p}{(}\PYGdefault{n}{num\PYGdefaultZus{}alpha}\PYGdefault{p}{)):}
+	\PYGdefault{n}{loss\PYGdefaultZus{}hist}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{,:]} \PYGdefault{o}{=} \PYGdefault{n}{batch\PYGdefaultZus{}grad\PYGdefaultZus{}descent}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,}\PYGdefault{n}{y}\PYGdefault{p}{,}\PYGdefault{n}{alpha}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{],}\PYGdefault{n}{num\PYGdefaultZus{}iter}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{1000}\PYGdefault{p}{)[}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]}
+
+	\PYGdefault{k}{return} \PYGdefault{n}{loss\PYGdefaultZus{}hist}
+\end{Verbatim}

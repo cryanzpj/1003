@@ -1,0 +1,70 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{batch\PYGdefaultZus{}line\PYGdefaultZus{}search\PYGdefaultZus{}grad\PYGdefaultZus{}descent}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,}\PYGdefault{n}{y}\PYGdefault{p}{,}\PYGdefault{n}{num\PYGdefaultZus{}iter}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{1000}\PYGdefault{p}{,}\PYGdefault{n}{tau} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{0.5}\PYGdefault{p}{,}\PYGdefault{n}{c} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{0.5}\PYGdefault{p}{,}\PYGdefault{n}{alpha\PYGdefaultZus{}0} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{0.5}\PYGdefault{p}{):}
+
+	\PYGdefault{l+s+sd}{\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+\PYGdefault{l+s+sd}{	use backtracking line search to minimize the square loss objective}
+
+\PYGdefault{l+s+sd}{	Args:}
+\PYGdefault{l+s+sd}{	X \PYGdefaultZhy{} the feature vector, 2D numpy array of size (num\PYGdefaultZus{}instances, num\PYGdefaultZus{}features)}
+\PYGdefault{l+s+sd}{	y \PYGdefaultZhy{} the label vector, 1D numpy array of size (num\PYGdefaultZus{}instances)}
+\PYGdefault{l+s+sd}{	num\PYGdefaultZus{}iter \PYGdefaultZhy{} number of iterations to run}
+\PYGdefault{l+s+sd}{	tau,c,alpha\PYGdefaultZus{}0 \PYGdefaultZhy{} float number, the parameters used for step search}
+
+\PYGdefault{l+s+sd}{	Returns:}
+\PYGdefault{l+s+sd}{	theta\PYGdefaultZus{}hist \PYGdefaultZhy{} store the the history of parameter vector in iteration}
+\PYGdefault{l+s+sd}{	loss\PYGdefaultZus{}hist \PYGdefaultZhy{} the history of objective function vector}
+\PYGdefault{l+s+sd}{	time\PYGdefaultZus{}list \PYGdefaultZhy{} the time used to each the step size for each iteration, 1D numpy array}
+\PYGdefault{l+s+sd}{	\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+
+	\PYGdefault{n}{num\PYGdefaultZus{}instances}\PYGdefault{p}{,} \PYGdefault{n}{num\PYGdefaultZus{}features} \PYGdefault{o}{=} \PYGdefault{n}{X}\PYGdefault{o}{.}\PYGdefault{n}{shape}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{],} \PYGdefault{n}{X}\PYGdefault{o}{.}\PYGdefault{n}{shape}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]}
+	\PYGdefault{n}{theta\PYGdefaultZus{}hist} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{zeros}\PYGdefault{p}{((}\PYGdefault{n}{num\PYGdefaultZus{}iter}\PYGdefault{o}{+}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{,} \PYGdefault{n}{num\PYGdefaultZus{}features}\PYGdefault{p}{))}  \PYGdefault{c}{\PYGdefaultZsh{}Initialize theta\PYGdefaultZus{}hist}
+	\PYGdefault{n}{loss\PYGdefaultZus{}hist} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{zeros}\PYGdefault{p}{(}\PYGdefault{n}{num\PYGdefaultZus{}iter}\PYGdefault{o}{+}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{)} \PYGdefault{c}{\PYGdefaultZsh{}initialize loss\PYGdefaultZus{}hist}
+	\PYGdefault{n}{theta} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{ones}\PYGdefault{p}{(}\PYGdefault{n}{num\PYGdefaultZus{}features}\PYGdefault{p}{)} \PYGdefault{c}{\PYGdefaultZsh{}initialize theta}
+
+	\PYGdefault{n}{theta\PYGdefaultZus{}hist}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{,:]} \PYGdefault{o}{=} \PYGdefault{n}{theta}
+	\PYGdefault{n}{loss\PYGdefaultZus{}hist}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{]} \PYGdefault{o}{=} \PYGdefault{n}{compute\PYGdefaultZus{}square\PYGdefaultZus{}loss}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,}\PYGdefault{n}{y}\PYGdefault{p}{,}\PYGdefault{n}{theta}\PYGdefault{p}{)}
+	\PYGdefault{n}{time\PYGdefaultZus{}list} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{zeros}\PYGdefault{p}{(}\PYGdefault{n}{num\PYGdefaultZus{}iter}\PYGdefault{p}{)}
+
+	\PYGdefault{k}{for} \PYGdefault{n}{i} \PYGdefault{o+ow}{in} \PYGdefault{n+nb}{list}\PYGdefault{p}{(}\PYGdefault{n+nb}{xrange}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{,}\PYGdefault{n}{num\PYGdefaultZus{}iter}\PYGdefault{o}{+}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{)):}
+		\PYGdefault{n}{alpha} \PYGdefault{o}{=} \PYGdefault{n}{alpha\PYGdefaultZus{}0}
+		\PYGdefault{n}{p} \PYGdefault{o}{=} \PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{compute\PYGdefaultZus{}square\PYGdefaultZus{}loss\PYGdefaultZus{}gradient}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,}\PYGdefault{n}{y}\PYGdefault{p}{,}\PYGdefault{n}{theta}\PYGdefault{p}{)}
+		\PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{1.0} \PYGdefault{o}{*}\PYGdefault{n}{c} \PYGdefault{o}{*} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{linalg}\PYGdefault{o}{.}\PYGdefault{n}{norm}\PYGdefault{p}{(}\PYGdefault{n}{p}\PYGdefault{p}{)}\PYGdefault{o}{**}\PYGdefault{l+m+mi}{2}
+		\PYGdefault{n}{temp1} \PYGdefault{o}{=} \PYGdefault{n}{compute\PYGdefaultZus{}square\PYGdefaultZus{}loss}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,}\PYGdefault{n}{y}\PYGdefault{p}{,}\PYGdefault{n}{theta}\PYGdefault{p}{)}  \PYGdefault{c}{\PYGdefaultZsh{}find current loss}
+		\PYGdefault{n}{current}  \PYGdefault{o}{=}\PYGdefault{n}{time}\PYGdefault{o}{.}\PYGdefault{n}{time}\PYGdefault{p}{()}
+		\PYGdefault{k}{while} \PYGdefault{l+m+mi}{1}\PYGdefault{p}{:}
+			\PYGdefault{n}{temp2} \PYGdefault{o}{=} \PYGdefault{n}{compute\PYGdefaultZus{}square\PYGdefaultZus{}loss}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,}\PYGdefault{n}{y}\PYGdefault{p}{,}\PYGdefault{n}{theta}\PYGdefault{o}{+} \PYGdefault{n}{alpha} \PYGdefault{o}{*}\PYGdefault{n}{p}\PYGdefault{p}{)}
+			\PYGdefault{c}{\PYGdefaultZsh{}compute loss at current step}
+			\PYGdefault{k}{if}   \PYGdefault{n}{temp2} \PYGdefault{o}{\PYGdefaultZgt{}}  \PYGdefault{n}{temp1} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{alpha} \PYGdefault{o}{*} \PYGdefault{n}{t}\PYGdefault{p}{:}
+				\PYGdefault{n}{alpha} \PYGdefault{o}{=} \PYGdefault{n}{tau}\PYGdefault{o}{*} \PYGdefault{n}{alpha}  \PYGdefault{c}{\PYGdefaultZsh{}shrink alpha}
+				\PYGdefault{k}{continue}
+			\PYGdefault{k}{else}\PYGdefault{p}{:}
+				\PYGdefault{n}{time\PYGdefaultZus{}list}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]} \PYGdefault{o}{=} \PYGdefault{n}{time}\PYGdefault{o}{.}\PYGdefault{n}{time}\PYGdefault{p}{()} \PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{current}
+				\PYGdefault{k}{break}
+
+		\PYGdefault{n}{theta} \PYGdefault{o}{=} \PYGdefault{n}{theta}\PYGdefault{o}{+} \PYGdefault{n}{alpha} \PYGdefault{o}{*}\PYGdefault{n}{p}
+		\PYGdefault{n}{theta\PYGdefaultZus{}hist}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{,:]} \PYGdefault{o}{=} \PYGdefault{n}{theta}
+		\PYGdefault{n}{loss\PYGdefaultZus{}hist}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{]} \PYGdefault{o}{=} \PYGdefault{n}{temp2}
+
+	\PYGdefault{k}{return} \PYGdefault{p}{(}\PYGdefault{n}{theta\PYGdefaultZus{}hist}\PYGdefault{p}{,}\PYGdefault{n}{loss\PYGdefaultZus{}hist}\PYGdefault{p}{,}\PYGdefault{n}{time\PYGdefaultZus{}list}\PYGdefault{p}{)}
+
+\PYGdefault{n}{current1}  \PYGdefault{o}{=} \PYGdefault{n}{datetime}\PYGdefault{o}{.}\PYGdefault{n}{datetime}\PYGdefault{o}{.}\PYGdefault{n}{now}\PYGdefault{p}{()}
+\PYGdefault{n}{batch\PYGdefaultZus{}line\PYGdefaultZus{}search\PYGdefaultZus{}grad\PYGdefaultZus{}descent}\PYGdefault{p}{(}\PYGdefault{n}{X\PYGdefaultZus{}train}\PYGdefault{p}{,}\PYGdefault{n}{y\PYGdefaultZus{}train}\PYGdefault{p}{)}
+\PYGdefault{k}{print}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}runing time of backtracking line search GD:\PYGdefaultZsq{}} \PYGdefault{o}{+} \PYGdefault{n+nb}{str}\PYGdefault{p}{(}\PYGdefault{n}{datetime}\PYGdefault{o}{.}\PYGdefault{n}{datetime}\PYGdefault{o}{.}\PYGdefault{n}{now}\PYGdefault{p}{()} \PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{current1}\PYGdefault{p}{)} \PYGdefault{p}{)}
+
+\PYGdefault{n}{current2}  \PYGdefault{o}{=} \PYGdefault{n}{datetime}\PYGdefault{o}{.}\PYGdefault{n}{datetime}\PYGdefault{o}{.}\PYGdefault{n}{now}\PYGdefault{p}{()}
+\PYGdefault{n}{batch\PYGdefaultZus{}grad\PYGdefaultZus{}descent}\PYGdefault{p}{(}\PYGdefault{n}{X\PYGdefaultZus{}train}\PYGdefault{p}{,}\PYGdefault{n}{y\PYGdefaultZus{}train}\PYGdefault{p}{)}
+\PYGdefault{k}{print}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}runing time of Batch GD :\PYGdefaultZsq{}} \PYGdefault{o}{+} \PYGdefault{n+nb}{str}\PYGdefault{p}{(}\PYGdefault{n}{datetime}\PYGdefault{o}{.}\PYGdefault{n}{datetime}\PYGdefault{o}{.}\PYGdefault{n}{now}\PYGdefault{p}{()} \PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{current2}\PYGdefault{p}{)} \PYGdefault{p}{)}
+
+\PYGdefault{n}{current3} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{mean}\PYGdefault{p}{(}\PYGdefault{n}{batch\PYGdefaultZus{}line\PYGdefaultZus{}search\PYGdefaultZus{}grad\PYGdefaultZus{}descent}\PYGdefault{p}{(}\PYGdefault{n}{X\PYGdefaultZus{}train}\PYGdefault{p}{,}\PYGdefault{n}{y\PYGdefaultZus{}train}\PYGdefault{p}{)[}\PYGdefault{l+m+mi}{2}\PYGdefault{p}{])}
+\PYGdefault{k}{print}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}average extra runing time for step search: \PYGdefaultZsq{}} \PYGdefault{o}{+} \PYGdefault{n+nb}{str}\PYGdefault{p}{(}\PYGdefault{n}{current3}\PYGdefault{p}{)} \PYGdefault{p}{)}
+
+\PYGdefault{n}{current4}  \PYGdefault{o}{=} \PYGdefault{n}{time}\PYGdefault{o}{.}\PYGdefault{n}{time}\PYGdefault{p}{()}
+\PYGdefault{n}{compute\PYGdefaultZus{}square\PYGdefaultZus{}loss\PYGdefaultZus{}gradient}\PYGdefault{p}{(}\PYGdefault{n}{X\PYGdefaultZus{}train}\PYGdefault{p}{,}\PYGdefault{n}{y\PYGdefaultZus{}train}\PYGdefault{p}{,}\PYGdefault{n}{theta}\PYGdefault{p}{)}
+\PYGdefault{k}{print}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}runing time for computing gradient \PYGdefaultZsq{}} \PYGdefault{o}{+} \PYGdefault{n+nb}{str}\PYGdefault{p}{(}\PYGdefault{n}{time}\PYGdefault{o}{.}\PYGdefault{n}{time}\PYGdefault{p}{()} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{current4}\PYGdefault{p}{)} \PYGdefault{p}{)}
+
+
+\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}}\PYGdefault{n}{runing} \PYGdefault{n}{time} \PYGdefault{n}{of} \PYGdefault{n}{backtracking} \PYGdefault{n}{line} \PYGdefault{n}{search}\PYGdefault{p}{:} \PYGdefault{n}{GD0}\PYGdefault{p}{:}\PYGdefault{l+m+mo}{00}\PYGdefault{p}{:}\PYGdefault{l+m+mf}{00.121715}
+\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}}\PYGdefault{n}{runing} \PYGdefault{n}{time} \PYGdefault{n}{of} \PYGdefault{n}{Batch} \PYGdefault{n}{GD}\PYGdefault{p}{:} \PYGdefault{l+m+mi}{0}\PYGdefault{p}{:}\PYGdefault{l+m+mo}{00}\PYGdefault{p}{:}\PYGdefault{l+m+mf}{00.038145}
+\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}}\PYGdefault{n}{average} \PYGdefault{n}{extra} \PYGdefault{n}{runing} \PYGdefault{n}{time} \PYGdefault{k}{for} \PYGdefault{n}{step} \PYGdefault{n}{search}\PYGdefault{p}{:} \PYGdefault{l+m+mf}{4.21249866486e\PYGdefaultZhy{}05}
+\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}}\PYGdefault{n}{runing} \PYGdefault{n}{time} \PYGdefault{k}{for} \PYGdefault{n}{computing} \PYGdefault{n}{gradient} \PYGdefault{l+m+mf}{6.48498535156e\PYGdefaultZhy{}05}
+\end{Verbatim}

@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{compute\PYGdefaultZus{}regularized\PYGdefaultZus{}square\PYGdefaultZus{}loss\PYGdefaultZus{}gradient}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,} \PYGdefault{n}{y}\PYGdefault{p}{,} \PYGdefault{n}{theta}\PYGdefault{p}{,} \PYGdefault{n}{lambda\PYGdefaultZus{}reg}\PYGdefault{p}{):}
+	\PYGdefault{l+s+sd}{\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+\PYGdefault{l+s+sd}{	Compute the gradient of L2\PYGdefaultZhy{}regularized square loss function given X, y and theta}
+
+\PYGdefault{l+s+sd}{	Args:}
+\PYGdefault{l+s+sd}{	X \PYGdefaultZhy{} the feature vector, 2D numpy array of size (num\PYGdefaultZus{}instances, num\PYGdefaultZus{}features)}
+\PYGdefault{l+s+sd}{	y \PYGdefaultZhy{} the label vector, 1D numpy array of size (num\PYGdefaultZus{}instances)}
+\PYGdefault{l+s+sd}{	theta \PYGdefaultZhy{} the parameter vector, 1D numpy array of size (num\PYGdefaultZus{}features)}
+\PYGdefault{l+s+sd}{	lambda\PYGdefaultZus{}reg \PYGdefaultZhy{} the regularization coefficient}
+
+\PYGdefault{l+s+sd}{	Returns:}
+\PYGdefault{l+s+sd}{	grad \PYGdefaultZhy{} gradient vector, 1D numpy array of size (num\PYGdefaultZus{}features)}
+\PYGdefault{l+s+sd}{	\PYGdefaultZdq{}\PYGdefaultZdq{}\PYGdefaultZdq{}}
+	\PYGdefault{k}{return} \PYGdefault{n}{compute\PYGdefaultZus{}square\PYGdefaultZus{}loss\PYGdefaultZus{}gradient}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,}\PYGdefault{n}{y}\PYGdefault{p}{,}\PYGdefault{n}{theta}\PYGdefault{p}{)} \PYGdefault{o}{+} \PYGdefault{l+m+mi}{2}\PYGdefault{o}{*}\PYGdefault{n}{lambda\PYGdefaultZus{}reg}\PYGdefault{o}{*}\PYGdefault{n}{theta}
+\end{Verbatim}

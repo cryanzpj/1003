@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{projected\PYGdefaultZus{}SGD}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,} \PYGdefault{n}{y}\PYGdefault{p}{,} \PYGdefault{n}{lambda\PYGdefaultZus{}} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{0.1}\PYGdefault{p}{,}\PYGdefault{n}{alpha} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{0.01}\PYGdefault{p}{,} \PYGdefault{n}{num\PYGdefaultZus{}iter} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{1000}\PYGdefault{p}{,}
+		\PYGdefault{n}{theta\PYGdefaultZus{}init} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{zeros}\PYGdefault{p}{((}\PYGdefault{n}{X}\PYGdefault{o}{.}\PYGdefault{n}{shape}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{],}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{))):}
+	\PYGdefault{n}{num\PYGdefaultZus{}instances}\PYGdefault{p}{,} \PYGdefault{n}{num\PYGdefaultZus{}features} \PYGdefault{o}{=} \PYGdefault{n}{X}\PYGdefault{o}{.}\PYGdefault{n}{shape}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{],} \PYGdefault{n}{X}\PYGdefault{o}{.}\PYGdefault{n}{shape}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]}
+	\PYGdefault{n}{theta\PYGdefaultZus{}p} \PYGdefault{o}{=} \PYGdefault{n}{theta\PYGdefaultZus{}init}
+	\PYGdefault{n}{theta\PYGdefaultZus{}n} \PYGdefault{o}{=} \PYGdefault{n}{theta\PYGdefaultZus{}init}
+	\PYGdefault{n}{theta} \PYGdefault{o}{=} \PYGdefault{n}{theta\PYGdefaultZus{}p} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{theta\PYGdefaultZus{}n}
+
+	\PYGdefault{k}{for} \PYGdefault{n}{n} \PYGdefault{o+ow}{in} \PYGdefault{n+nb}{list}\PYGdefault{p}{(}\PYGdefault{n+nb}{xrange}\PYGdefault{p}{(}\PYGdefault{n}{num\PYGdefaultZus{}iter}\PYGdefault{p}{)):}
+		\PYGdefault{n}{generator} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{random}\PYGdefault{o}{.}\PYGdefault{n}{permutation}\PYGdefault{p}{(}\PYGdefault{n+nb}{list}\PYGdefault{p}{(}\PYGdefault{n+nb}{xrange}\PYGdefault{p}{(}\PYGdefault{n}{num\PYGdefaultZus{}instances}\PYGdefault{p}{)))}
+		\PYGdefault{k}{for} \PYGdefault{n}{i} \PYGdefault{o+ow}{in} \PYGdefault{n+nb}{list}\PYGdefault{p}{(}\PYGdefault{n+nb}{xrange}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{,}\PYGdefault{n}{num\PYGdefaultZus{}instances}\PYGdefault{p}{)):}
+
+		\PYGdefault{n}{num} \PYGdefault{o}{=} \PYGdefault{n}{generator}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{]}
+		\PYGdefault{n}{theta\PYGdefaultZus{}p} \PYGdefault{o}{=} \PYGdefault{n}{theta\PYGdefaultZus{}p} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{alpha}\PYGdefault{o}{*}\PYGdefault{p}{(}\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{inner}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{[}\PYGdefault{n}{num}\PYGdefault{p}{,:],}\PYGdefault{n}{theta}\PYGdefault{o}{.}\PYGdefault{n}{T}\PYGdefault{p}{)} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{y}\PYGdefault{p}{[}\PYGdefault{n}{num}\PYGdefault{p}{])}\PYGdefault{o}{*}
+					\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{([}\PYGdefault{n}{X}\PYGdefault{p}{[}\PYGdefault{n}{num}\PYGdefault{p}{,:]])}\PYGdefault{o}{.}\PYGdefault{n}{T} \PYGdefault{o}{+}\PYGdefault{n}{lambda\PYGdefaultZus{}}
+		\PYGdefault{n}{theta\PYGdefaultZus{}n} \PYGdefault{o}{=} \PYGdefault{n}{theta\PYGdefaultZus{}n} \PYGdefault{o}{+}   \PYGdefault{n}{alpha}\PYGdefault{o}{*}\PYGdefault{p}{(}\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{inner}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{[}\PYGdefault{n}{num}\PYGdefault{p}{,:],}\PYGdefault{n}{theta}\PYGdefault{o}{.}\PYGdefault{n}{T}\PYGdefault{p}{)} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{y}\PYGdefault{p}{[}\PYGdefault{n}{num}\PYGdefault{p}{])}\PYGdefault{o}{*}
+					\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{([}\PYGdefault{n}{X}\PYGdefault{p}{[}\PYGdefault{n}{num}\PYGdefault{p}{,:]])}\PYGdefault{o}{.}\PYGdefault{n}{T} \PYGdefault{o}{+}\PYGdefault{n}{lambda\PYGdefaultZus{}}
+
+		\PYGdefault{n}{theta\PYGdefaultZus{}p} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{n}{theta\PYGdefaultZus{}p}\PYGdefault{o}{\PYGdefaultZgt{}}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{)}\PYGdefault{o}{*}\PYGdefault{n}{theta\PYGdefaultZus{}p}
+		\PYGdefault{n}{tehta\PYGdefaultZus{}n} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{n}{theta\PYGdefaultZus{}n}\PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{)} \PYGdefault{o}{*}\PYGdefault{n}{theta\PYGdefaultZus{}n}
+		\PYGdefault{n}{theta} \PYGdefault{o}{=} \PYGdefault{n}{theta\PYGdefaultZus{}p} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{theta\PYGdefaultZus{}n}
+
+	\PYGdefault{n}{loss\PYGdefaultZus{}hist} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{linalg}\PYGdefault{o}{.}\PYGdefault{n}{norm}\PYGdefault{p}{(}\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{dot}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,}\PYGdefault{n}{theta}\PYGdefault{p}{)}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{y}\PYGdefault{p}{)}\PYGdefault{o}{**}\PYGdefault{l+m+mi}{2} \PYGdefault{o}{*}\PYGdefault{p}{(}\PYGdefault{l+m+mf}{1.0}\PYGdefault{o}{/}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{2}\PYGdefault{o}{*}\PYGdefault{n}{num\PYGdefaultZus{}instances}\PYGdefault{p}{))}
+
+\PYGdefault{k}{return} \PYGdefault{p}{(}\PYGdefault{n}{theta}\PYGdefault{p}{,}\PYGdefault{n}{loss\PYGdefaultZus{}hist}\PYGdefault{p}{)}
+\end{Verbatim}
