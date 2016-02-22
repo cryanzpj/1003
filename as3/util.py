@@ -1,5 +1,8 @@
 # Taken from http://web.stanford.edu/class/cs221/ Assignment #2 Support Code
 
+from collections import Counter
+
+
 
 def dotProduct(d1, d2):
     """
@@ -26,3 +29,19 @@ def increment(d1, scale, d2):
     """
     for f, v in d2.items():
         d1[f] = d1.get(f, 0) + v * scale
+
+
+def tokenlizer(text):
+    '''
+    converts a list of words into bag-of-words
+    Args:
+        text: a list of words
+
+    Returns: a dictionary/ hash table
+
+    '''
+    res = Counter()
+    for i in text:
+        res[i] +=1
+    return res
+
