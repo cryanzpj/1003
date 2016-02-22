@@ -9,13 +9,17 @@ import pickle
 import random
 import time
 
-X_train = np.load("X_train.npy")
-X_test = np.load("X_test.npy")
-y_train = np.load("Y_train.npy")
-y_test  = np.load("Y_test.npy")
 
 
 def mapper(data):
+    '''
+    function for map reduce that chop dictionary into 5 dicts
+
+    Args:
+        data: the input dict
+
+    Returns: tuple of 5 dict
+    '''
     diff = len(data.keys())//5
     r1 = dict(data.items()[:diff])
     r2 = dict(data.items()[diff:2*diff])
@@ -25,6 +29,16 @@ def mapper(data):
     return (r1,r2,r3,r4,r5)
 
 def scale(x,c):
+    '''
+    scale dicitionary by constant c
+
+    Args:
+        x:
+        c:
+
+    Returns:
+
+    '''
     if x == Counter():
         return x
     else:
@@ -35,6 +49,18 @@ def scale(x,c):
 
 
 def pegasos_svm_sgd(X,y,lambda_ = 10,n_ite = 1):
+    '''
+    pegasos svm with pure sgd approach
+
+    Args:
+        X: Train data
+        y: Train lable
+        lambda_: regulization
+        n_ite: max iterations
+
+    Returns: sparse representaion of the weight
+
+    '''
     X = np.array(map(lambda a: tokenlizer(a) , X),dtype = object)
     num_instances = X.shape[0]
     t = 0.0
@@ -57,7 +83,19 @@ def pegasos_svm_sgd(X,y,lambda_ = 10,n_ite = 1):
     print( time.time() -time_ )
     return w
 
-def pegasos_svm_sgd_2(X,y,lambda_ = 10,n_ite = 1):
+def pegasos_svm_sgd_2(X,y,lambda_ = 10,n_ite = 10):
+    '''
+    updated pegasos svm with pure sgd approach
+
+    Args:
+        X: Train data
+        y: Train lable
+        lambda_: regulization
+        n_ite: max iterations
+
+    Returns: sparse representaion of the weight
+
+    '''
     X = np.array(map(lambda a: tokenlizer(a) , X),dtype = object)
     num_instances = X.shape[0]
     t = 1.0
@@ -78,10 +116,38 @@ def pegasos_svm_sgd_2(X,y,lambda_ = 10,n_ite = 1):
     return scale(W,s)
 
 def loss(X,y,w):
+    '''
+    loss function for svm
+
+    Args:
+        X: testing data
+        y: true lables
+        w: weight
+
+    Returns: loss
+
+    '''
     X = np.array(map(lambda a: tokenlizer(a) , X),dtype = object)
     return np.mean(map(lambda t: np.max(np.array((t,0))), 1- np.array(map(lambda t: dotProduct(w,t),X))*y))
 
 
 
-t = pegasos_svm_sgd_2(X_train,y_train,1,1)
-loss(X_train,y_train,t)
+
+if __name__ == '__main__':
+
+    X_train = np.load("X_train.npy")
+    X_test = np.load("X_test.npy")
+    y_train = np.load("Y_train.npy")
+    y_test  = np.load("Y_test.npy")
+
+
+    w1 = pegasos_svm_sgd(X_train,y_train,1,1)  # 35s
+    l1 = loss(X_train,y_train,w1)
+
+    w2 = pegasos_svm_sgd_2(X_train,y_train,1,1) # 0.38 s
+    l2 = loss(X_train,y_train,w2)
+
+    #####6.6
+    try_list = np.power(10.0,list(range(-5,5)))
+    map(lambda t: pegasos_svm_sgd_2(X_train,y_train,t), try_list)
+
