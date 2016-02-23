@@ -170,11 +170,11 @@ if __name__ == '__main__':
 
 
 
-    try_list_2 = np.power(10.0,np.linspace(-2,0,20))
+    try_list_2 = np.power(10.0,np.linspace(-6,-4,20))
     loss_list_2 = np.zeros(20)
     for i,j in enumerate(try_list_2):
         w = pegasos_svm_sgd_2(X_train,y_train,lambda_ = j,n_ite = 20)
-        loss_list_2[i] = loss(X_test,y_test,w)
+        loss_list_2[i] = loss_0_1(X_test,y_test,w)
 
     lambda_opt = try_list_2[np.where(loss_list_2 == min(loss_list_2))[0][0]]
 
