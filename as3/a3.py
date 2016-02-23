@@ -28,6 +28,7 @@ def mapper(data):
     r5 = dict(data.items()[4*diff:])
     return (r1,r2,r3,r4,r5)
 
+
 def scale(x,c):
     '''
     scale dicitionary by constant c
@@ -83,7 +84,8 @@ def pegasos_svm_sgd(X,y,lambda_ = 10,n_ite = 1):
     print( time.time() -time_ )
     return w
 
-def pegasos_svm_sgd_2(X,y,lambda_ = 1,n_ite = 10):
+
+def pegasos_svm_sgd_2(X,y,lambda_ = 1,n_ite = 10,counter = False,print_time = False):
     '''
     updated pegasos svm with pure sgd approach
 
@@ -92,6 +94,7 @@ def pegasos_svm_sgd_2(X,y,lambda_ = 1,n_ite = 10):
         y: Train lable
         lambda_: regulization
         n_ite: max iterations
+        counter: whether count the # of nondifferentiable case
 
     Returns: sparse representaion of the weight
 
@@ -102,6 +105,7 @@ def pegasos_svm_sgd_2(X,y,lambda_ = 1,n_ite = 10):
     n = 0
     W = Counter()
     s=1.0
+    count = 0.0
     time_ = time.time()
     while n < n_ite:
         generator = np.random.permutation(list(xrange(num_instances))) # define ramdom sampling sequence
@@ -109,11 +113,19 @@ def pegasos_svm_sgd_2(X,y,lambda_ = 1,n_ite = 10):
             t+=1
             eta = 1/(t*lambda_)
             s = (1 - eta*lambda_)*s
-            if dotProduct(W,X[i])*y[i] <1/s:
+            temp = dotProduct(W,X[i])
+            if temp ==0 and counter==True:
+                count+=1.0
+            if temp*y[i] <1/s:
                 increment(W,1/s *eta *y[i], X[i])
+
         n+=1
-    print( time.time() -time_ )
+    if print_time:
+        print( time.time() -time_ )
+    if counter:
+        print count/(num_instances*n_ite)
     return scale(W,s)
+
 
 def loss_svm(X,y,w):
     '''
@@ -129,6 +141,7 @@ def loss_svm(X,y,w):
     '''
     X = np.array(map(lambda a: tokenlizer(a) , X),dtype = object)
     return np.mean(map(lambda t: np.max(np.array((t,0))), 1- np.array(map(lambda t: dotProduct(w,t),X))*y))
+
 
 def loss_0_1(X,y,w):
     '''
@@ -146,6 +159,25 @@ def loss_0_1(X,y,w):
     return np.mean(map(lambda t: 1 if t>0 else 0, 1- np.array(map(lambda t: dotProduct(w,t),X))*y))
 
 
+def list_feature(X,w,n):
+    '''
+    show n heavily features
+
+    Args:
+        X: input data
+        w: weightes
+        n: number of features to display
+
+    Returns: r1:word, r2 number cotained in input, r3 weight, r4 contribution
+
+    '''
+    temp = Counter()
+    for i,j in w.items():
+        temp[i] = abs(j*X[i])
+    res = np.zeros((4,n),dtype=object)
+    for k,i in enumerate(temp.most_common(n)):
+        res[:,k] = i[0],X[i[0]],w[i[0]],X[i[0]] *w[i[0]]
+    return res
 
 if __name__ == '__main__':
 
@@ -177,4 +209,20 @@ if __name__ == '__main__':
         loss_list_2[i] = loss_0_1(X_test,y_test,w)
 
     lambda_opt = try_list_2[np.where(loss_list_2 == min(loss_list_2))[0][0]]
+    w_opt = pegasos_svm_sgd_2(X_train,y_train,lambda_ = lambda_opt,n_ite = 20)
 
+    X = np.array(map(lambda a: tokenlizer(a) , X_test),dtype = object)
+    y = y_test
+    score = np.array(map(lambda t: dotProduct(w_opt,t),X))
+    prediction = map(lambda t: 1 if t>0 else 0, 1- np.array(map(lambda t: dotProduct(w,t),X))*y)
+    score_list = np.vstack((np.array(score),np.array(prediction))).T
+
+    #7
+    error_list = np.where(np.array(prediction) ==1)[0][:4]
+    txt_error = X[error_list]
+
+    res = []
+    for i in txt_error:
+        res.append(list_feature(i,w_opt,5))
+
+    #8
