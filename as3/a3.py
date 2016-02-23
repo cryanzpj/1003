@@ -83,7 +83,7 @@ def pegasos_svm_sgd(X,y,lambda_ = 10,n_ite = 1):
     print( time.time() -time_ )
     return w
 
-def pegasos_svm_sgd_2(X,y,lambda_ = 10,n_ite = 10):
+def pegasos_svm_sgd_2(X,y,lambda_ = 1,n_ite = 10):
     '''
     updated pegasos svm with pure sgd approach
 
@@ -115,7 +115,7 @@ def pegasos_svm_sgd_2(X,y,lambda_ = 10,n_ite = 10):
     print( time.time() -time_ )
     return scale(W,s)
 
-def loss(X,y,w):
+def loss_svm(X,y,w):
     '''
     loss function for svm
 
@@ -130,6 +130,20 @@ def loss(X,y,w):
     X = np.array(map(lambda a: tokenlizer(a) , X),dtype = object)
     return np.mean(map(lambda t: np.max(np.array((t,0))), 1- np.array(map(lambda t: dotProduct(w,t),X))*y))
 
+def loss_0_1(X,y,w):
+    '''
+    0_1 loss function for svm
+
+    Args:
+        X: testing data
+        y: true lables
+        w: weight
+
+    Returns: loss
+
+    '''
+    X = np.array(map(lambda a: tokenlizer(a) , X),dtype = object)
+    return np.mean(map(lambda t: 1 if t>0 else 0, 1- np.array(map(lambda t: dotProduct(w,t),X))*y))
 
 
 
@@ -148,6 +162,19 @@ if __name__ == '__main__':
     l2 = loss(X_train,y_train,w2)
 
     #####6.6
-    try_list = np.power(10.0,list(range(-5,5)))
-    map(lambda t: pegasos_svm_sgd_2(X_train,y_train,t), try_list)
+    try_list = np.power(10.0,list(range(-8,5)))
+    loss_list = np.zeros(13)
+    for i,j in enumerate(try_list):
+        w = pegasos_svm_sgd_2(X_train,y_train,lambda_ = j,n_ite = 10)
+        loss_list[i] = loss_0_1(X_test,y_test,w)
+
+
+
+    try_list_2 = np.power(10.0,np.linspace(-2,0,20))
+    loss_list_2 = np.zeros(20)
+    for i,j in enumerate(try_list_2):
+        w = pegasos_svm_sgd_2(X_train,y_train,lambda_ = j,n_ite = 20)
+        loss_list_2[i] = loss(X_test,y_test,w)
+
+    lambda_opt = try_list_2[np.where(loss_list_2 == min(loss_list_2))[0][0]]
 
