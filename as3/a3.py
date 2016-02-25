@@ -223,6 +223,6 @@ if __name__ == '__main__':
 
     res = []
     for i in txt_error:
-        res.append(list_feature(i,w_opt,5))
-
+        res.extend(list_feature(i,w_opt,5))
+    res = np.array(res)
     #8
