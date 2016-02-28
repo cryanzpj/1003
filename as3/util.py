@@ -37,7 +37,7 @@ def tokenlizer(text):
     Args:
         text: a list of words
 
-    Returns: a dictionary/ hash table
+    Returns: a dictionary/ hash table of text
 
     '''
     res = Counter()

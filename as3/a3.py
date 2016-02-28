@@ -49,7 +49,7 @@ def scale(x,c):
 
 
 
-def pegasos_svm_sgd(X,y,lambda_ = 10,n_ite = 1):
+def pegasos_svm_sgd(X,y,lambda_ = 10,n_ite = 1,print_time = False):
     '''
     pegasos svm with pure sgd approach
 
@@ -58,6 +58,7 @@ def pegasos_svm_sgd(X,y,lambda_ = 10,n_ite = 1):
         y: Train lable
         lambda_: regulization
         n_ite: max iterations
+        print_time: whether count the operation time
 
     Returns: sparse representaion of the weight
 
@@ -74,14 +75,13 @@ def pegasos_svm_sgd(X,y,lambda_ = 10,n_ite = 1):
             t+=1
             eta = 1/(t*lambda_)
             if dotProduct(w,X[i])*y[i] <1:
-                #w = scale(w,- eta*lambda_)
                 increment(w,- eta*lambda_,w)
                 increment(w,eta*y[i],X[i])
             else:
-                #w = scale(w,- eta*lambda_)
                 increment(w,- eta*lambda_,w)
         n+=1
-    print( time.time() -time_ )
+    if print_time:
+        print( time.time() -time_ )
     return w
 
 
@@ -95,6 +95,7 @@ def pegasos_svm_sgd_2(X,y,lambda_ = 1,n_ite = 10,counter = False,print_time = Fa
         lambda_: regulization
         n_ite: max iterations
         counter: whether count the # of nondifferentiable case
+        print_time: whether count the operation time
 
     Returns: sparse representaion of the weight
 
@@ -121,7 +122,7 @@ def pegasos_svm_sgd_2(X,y,lambda_ = 1,n_ite = 10,counter = False,print_time = Fa
 
         n+=1
     if print_time:
-        print( time.time() -time_ )
+        print( "runtime = "+str(time.time() -time_ ))
     if counter:
         print count/(num_instances*n_ite)
     return scale(W,s)
@@ -156,7 +157,7 @@ def loss_0_1(X,y,w):
 
     '''
     X = np.array(map(lambda a: tokenlizer(a) , X),dtype = object)
-    return np.mean(map(lambda t: 1 if t>0 else 0, 1- np.array(map(lambda t: dotProduct(w,t),X))*y))
+    return np.mean(map(lambda t: 0 if t>=0 else 1, np.array(map(lambda t: dotProduct(w,t),X))*y))
 
 
 def list_feature(X,w,n):
@@ -188,10 +189,10 @@ if __name__ == '__main__':
 
 
     w1 = pegasos_svm_sgd(X_train,y_train,1,1)  # 35s
-    l1 = loss(X_train,y_train,w1)
+    l1 = loss_0_1(X_train,y_train,w1)
 
     w2 = pegasos_svm_sgd_2(X_train,y_train,1,1) # 0.38 s
-    l2 = loss(X_train,y_train,w2)
+    l2 = loss_0_1(X_train,y_train,w2)
 
     #####6.6
     try_list = np.power(10.0,list(range(-8,5)))
@@ -202,7 +203,7 @@ if __name__ == '__main__':
 
 
 
-    try_list_2 = np.power(10.0,np.linspace(-6,-4,20))
+    try_list_2 = np.power(10.0,np.linspace(-5,-4,20))
     loss_list_2 = np.zeros(20)
     for i,j in enumerate(try_list_2):
         w = pegasos_svm_sgd_2(X_train,y_train,lambda_ = j,n_ite = 20)
