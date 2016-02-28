@@ -1,0 +1,26 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{shuffle\PYGdefaultZus{}data}\PYGdefault{p}{():}
+\PYGdefault{l+s+sd}{\PYGdefaultZsq{}\PYGdefaultZsq{}\PYGdefaultZsq{}}
+\PYGdefault{l+s+sd}{pos\PYGdefaultZus{}path is where you save positive review data.}
+\PYGdefault{l+s+sd}{neg\PYGdefaultZus{}path is where you save negative review data.}
+\PYGdefault{l+s+sd}{return: shuffled data}
+\PYGdefault{l+s+sd}{\PYGdefaultZsq{}\PYGdefaultZsq{}\PYGdefaultZsq{}}
+	\PYGdefault{n}{pos\PYGdefaultZus{}path} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}/Users/cryan/Desktop/1003/github/as3/data/neg\PYGdefaultZdq{}}
+	\PYGdefault{n}{neg\PYGdefaultZus{}path} \PYGdefault{o}{=} \PYGdefault{l+s}{\PYGdefaultZdq{}/Users/cryan/Desktop/1003/github/as3/data/pos\PYGdefaultZdq{}}
+
+	\PYGdefault{n}{pos\PYGdefaultZus{}review} \PYGdefault{o}{=} \PYGdefault{n}{folder\PYGdefaultZus{}list}\PYGdefault{p}{(}\PYGdefault{n}{pos\PYGdefaultZus{}path}\PYGdefault{p}{,}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{)}
+	\PYGdefault{n}{neg\PYGdefaultZus{}review} \PYGdefault{o}{=} \PYGdefault{n}{folder\PYGdefaultZus{}list}\PYGdefault{p}{(}\PYGdefault{n}{neg\PYGdefaultZus{}path}\PYGdefault{p}{,}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{)}
+
+	\PYGdefault{n}{review} \PYGdefault{o}{=} \PYGdefault{n}{pos\PYGdefaultZus{}review} \PYGdefault{o}{+} \PYGdefault{n}{neg\PYGdefaultZus{}review}
+	\PYGdefault{n}{random}\PYGdefault{o}{.}\PYGdefault{n}{shuffle}\PYGdefault{p}{(}\PYGdefault{n}{review}\PYGdefault{p}{)}
+\PYGdefault{k}{return} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{(}\PYGdefault{n}{review}\PYGdefault{p}{)}
+
+\PYGdefault{n}{data} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{(}\PYGdefault{n}{shuffle\PYGdefaultZus{}data}\PYGdefault{p}{())}
+\PYGdefault{n}{data\PYGdefaultZus{}train} \PYGdefault{o}{=} \PYGdefault{n}{data}\PYGdefault{p}{[:}\PYGdefault{l+m+mi}{1500}\PYGdefault{p}{]}
+\PYGdefault{n}{data\PYGdefaultZus{}test} \PYGdefault{o}{=} \PYGdefault{n}{data}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{1500}\PYGdefault{p}{:]}
+
+\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{save}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}X\PYGdefaultZus{}train\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n+nb}{map}\PYGdefault{p}{(}\PYGdefault{k}{lambda} \PYGdefault{n}{x}\PYGdefault{p}{:} \PYGdefault{n}{x}\PYGdefault{p}{[:}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{],}\PYGdefault{n}{data\PYGdefaultZus{}train}\PYGdefault{p}{))}
+\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{save}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}X\PYGdefaultZus{}test\PYGdefaultZdq{}}\PYGdefault{p}{,} \PYGdefault{n+nb}{map}\PYGdefault{p}{(}\PYGdefault{k}{lambda} \PYGdefault{n}{x}\PYGdefault{p}{:} \PYGdefault{n}{x}\PYGdefault{p}{[:}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{],}\PYGdefault{n}{data\PYGdefaultZus{}test}\PYGdefault{p}{))}
+\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{save}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}Y\PYGdefaultZus{}train\PYGdefaultZsq{}}\PYGdefault{p}{,} \PYGdefault{n+nb}{map}\PYGdefault{p}{(}\PYGdefault{k}{lambda} \PYGdefault{n}{x}\PYGdefault{p}{:} \PYGdefault{n}{x}\PYGdefault{p}{[}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{],}\PYGdefault{n}{data\PYGdefaultZus{}train}\PYGdefault{p}{))}
+\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{save}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZsq{}Y\PYGdefaultZus{}test\PYGdefaultZsq{}}\PYGdefault{p}{,} \PYGdefault{n+nb}{map}\PYGdefault{p}{(}\PYGdefault{k}{lambda} \PYGdefault{n}{x}\PYGdefault{p}{:} \PYGdefault{n}{x}\PYGdefault{p}{[}\PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{],}\PYGdefault{n}{data\PYGdefaultZus{}test}\PYGdefault{p}{))}
+\end{Verbatim}

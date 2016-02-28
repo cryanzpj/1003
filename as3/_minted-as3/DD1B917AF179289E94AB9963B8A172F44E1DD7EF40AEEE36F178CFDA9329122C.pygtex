@@ -1,0 +1,61 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{scale}\PYGdefault{p}{(}\PYGdefault{n}{x}\PYGdefault{p}{,}\PYGdefault{n}{c}\PYGdefault{p}{):}
+\PYGdefault{l+s+sd}{\PYGdefaultZsq{}\PYGdefaultZsq{}\PYGdefaultZsq{}}
+\PYGdefault{l+s+sd}{scale dicitionary by constant c}
+
+\PYGdefault{l+s+sd}{Args:}
+\PYGdefault{l+s+sd}{x: input weight vector}
+\PYGdefault{l+s+sd}{c: increment constant}
+
+\PYGdefault{l+s+sd}{Returns: scaled dictionary}
+
+\PYGdefault{l+s+sd}{\PYGdefaultZsq{}\PYGdefaultZsq{}\PYGdefaultZsq{}}
+\PYGdefault{k}{if} \PYGdefault{n}{x} \PYGdefault{o}{==} \PYGdefault{n}{Counter}\PYGdefault{p}{():}
+	\PYGdefault{k}{return} \PYGdefault{n}{x}
+\PYGdefault{k}{else}\PYGdefault{p}{:}
+	\PYGdefault{n}{temp} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{(}\PYGdefault{n}{x}\PYGdefault{o}{.}\PYGdefault{n}{items}\PYGdefault{p}{(),}\PYGdefault{n}{dtype}\PYGdefault{o}{=} \PYGdefault{n+nb}{object}\PYGdefault{p}{)}
+	\PYGdefault{n}{temp}\PYGdefault{p}{[:,}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]} \PYGdefault{o}{=} \PYGdefault{n}{temp}\PYGdefault{p}{[:,}\PYGdefault{l+m+mi}{1}\PYGdefault{p}{]}\PYGdefault{o}{*}\PYGdefault{n}{c}
+	\PYGdefault{k}{return} \PYGdefault{n+nb}{dict}\PYGdefault{p}{(}\PYGdefault{n}{temp}\PYGdefault{p}{)}
+
+
+\PYGdefault{k}{def} \PYGdefault{n+nf}{pegasos\PYGdefaultZus{}svm\PYGdefaultZus{}sgd\PYGdefaultZus{}2}\PYGdefault{p}{(}\PYGdefault{n}{X}\PYGdefault{p}{,}\PYGdefault{n}{y}\PYGdefault{p}{,}\PYGdefault{n}{lambda\PYGdefaultZus{}} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{1}\PYGdefault{p}{,}\PYGdefault{n}{n\PYGdefaultZus{}ite} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{10}\PYGdefault{p}{,}\PYGdefault{n}{counter} \PYGdefault{o}{=} \PYGdefault{n+nb+bp}{False}\PYGdefault{p}{,}\PYGdefault{n}{print\PYGdefaultZus{}time} \PYGdefault{o}{=} \PYGdefault{n+nb+bp}{False}\PYGdefault{p}{):}
+\PYGdefault{l+s+sd}{\PYGdefaultZsq{}\PYGdefaultZsq{}\PYGdefaultZsq{}}
+\PYGdefault{l+s+sd}{updated pegasos svm with pure sgd approach}
+
+\PYGdefault{l+s+sd}{Args:}
+\PYGdefault{l+s+sd}{X: Train data}
+\PYGdefault{l+s+sd}{y: Train lable}
+\PYGdefault{l+s+sd}{lambda\PYGdefaultZus{}: regulization}
+\PYGdefault{l+s+sd}{n\PYGdefaultZus{}ite: max iterations}
+\PYGdefault{l+s+sd}{counter: whether count the \PYGdefaultZsh{} of nondifferentiable case}
+\PYGdefault{l+s+sd}{print\PYGdefaultZus{}time: whether count the operation time}
+
+\PYGdefault{l+s+sd}{Returns: sparse representaion of the weight}
+
+\PYGdefault{l+s+sd}{\PYGdefaultZsq{}\PYGdefaultZsq{}\PYGdefaultZsq{}}
+\PYGdefault{n}{X} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{(}\PYGdefault{n+nb}{map}\PYGdefault{p}{(}\PYGdefault{k}{lambda} \PYGdefault{n}{a}\PYGdefault{p}{:} \PYGdefault{n}{tokenlizer}\PYGdefault{p}{(}\PYGdefault{n}{a}\PYGdefault{p}{)} \PYGdefault{p}{,} \PYGdefault{n}{X}\PYGdefault{p}{),}\PYGdefault{n}{dtype} \PYGdefault{o}{=} \PYGdefault{n+nb}{object}\PYGdefault{p}{)}
+\PYGdefault{n}{num\PYGdefaultZus{}instances} \PYGdefault{o}{=} \PYGdefault{n}{X}\PYGdefault{o}{.}\PYGdefault{n}{shape}\PYGdefault{p}{[}\PYGdefault{l+m+mi}{0}\PYGdefault{p}{]}
+\PYGdefault{n}{t} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{1.0}
+\PYGdefault{n}{n} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{0}
+\PYGdefault{n}{W} \PYGdefault{o}{=} \PYGdefault{n}{Counter}\PYGdefault{p}{()}
+\PYGdefault{n}{s}\PYGdefault{o}{=}\PYGdefault{l+m+mf}{1.0}
+\PYGdefault{n}{count} \PYGdefault{o}{=} \PYGdefault{l+m+mf}{0.0}
+\PYGdefault{n}{time\PYGdefaultZus{}} \PYGdefault{o}{=} \PYGdefault{n}{time}\PYGdefault{o}{.}\PYGdefault{n}{time}\PYGdefault{p}{()}
+	\PYGdefault{k}{while} \PYGdefault{n}{n} \PYGdefault{o}{\PYGdefaultZlt{}} \PYGdefault{n}{n\PYGdefaultZus{}ite}\PYGdefault{p}{:}
+	\PYGdefault{n}{generator} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{random}\PYGdefault{o}{.}\PYGdefault{n}{permutation}\PYGdefault{p}{(}\PYGdefault{n+nb}{list}\PYGdefault{p}{(}\PYGdefault{n+nb}{xrange}\PYGdefault{p}{(}\PYGdefault{n}{num\PYGdefaultZus{}instances}\PYGdefault{p}{)))} \PYGdefault{c}{\PYGdefaultZsh{} define ramdom sampling sequence}
+	\PYGdefault{k}{for} \PYGdefault{n}{i} \PYGdefault{o+ow}{in} \PYGdefault{n}{generator}\PYGdefault{p}{:}
+		\PYGdefault{n}{t}\PYGdefault{o}{+=}\PYGdefault{l+m+mi}{1}
+		\PYGdefault{n}{eta} \PYGdefault{o}{=} \PYGdefault{l+m+mi}{1}\PYGdefault{o}{/}\PYGdefault{p}{(}\PYGdefault{n}{t}\PYGdefault{o}{*}\PYGdefault{n}{lambda\PYGdefaultZus{}}\PYGdefault{p}{)}
+		\PYGdefault{n}{s} \PYGdefault{o}{=} \PYGdefault{p}{(}\PYGdefault{l+m+mi}{1} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{eta}\PYGdefault{o}{*}\PYGdefault{n}{lambda\PYGdefaultZus{}}\PYGdefault{p}{)}\PYGdefault{o}{*}\PYGdefault{n}{s}
+		\PYGdefault{n}{temp} \PYGdefault{o}{=} \PYGdefault{n}{dotProduct}\PYGdefault{p}{(}\PYGdefault{n}{W}\PYGdefault{p}{,}\PYGdefault{n}{X}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{])}
+		\PYGdefault{k}{if} \PYGdefault{n}{temp} \PYGdefault{o}{==}\PYGdefault{l+m+mi}{0} \PYGdefault{o+ow}{and} \PYGdefault{n}{counter}\PYGdefault{o}{==}\PYGdefault{n+nb+bp}{True}\PYGdefault{p}{:}
+			\PYGdefault{n}{count}\PYGdefault{o}{+=}\PYGdefault{l+m+mf}{1.0}
+		\PYGdefault{k}{if} \PYGdefault{n}{temp}\PYGdefault{o}{*}\PYGdefault{n}{y}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{]} \PYGdefault{o}{\PYGdefaultZlt{}}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{/}\PYGdefault{n}{s}\PYGdefault{p}{:}
+			\PYGdefault{n}{increment}\PYGdefault{p}{(}\PYGdefault{n}{W}\PYGdefault{p}{,}\PYGdefault{l+m+mi}{1}\PYGdefault{o}{/}\PYGdefault{n}{s} \PYGdefault{o}{*}\PYGdefault{n}{eta} \PYGdefault{o}{*}\PYGdefault{n}{y}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{],} \PYGdefault{n}{X}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{])}
+	\PYGdefault{n}{n}\PYGdefault{o}{+=}\PYGdefault{l+m+mi}{1}
+\PYGdefault{k}{if} \PYGdefault{n}{print\PYGdefaultZus{}time}\PYGdefault{p}{:}
+	\PYGdefault{k}{print}\PYGdefault{p}{(} \PYGdefault{n}{time}\PYGdefault{o}{.}\PYGdefault{n}{time}\PYGdefault{p}{()} \PYGdefault{o}{\PYGdefaultZhy{}}\PYGdefault{n}{time\PYGdefaultZus{}} \PYGdefault{p}{)}
+\PYGdefault{k}{if} \PYGdefault{n}{counter}\PYGdefault{p}{:}
+	\PYGdefault{k}{print} \PYGdefault{n}{count}\PYGdefault{o}{/}\PYGdefault{p}{(}\PYGdefault{n}{num\PYGdefaultZus{}instances}\PYGdefault{o}{*}\PYGdefault{n}{n\PYGdefaultZus{}ite}\PYGdefault{p}{)}
+\PYGdefault{k}{return} \PYGdefault{n}{scale}\PYGdefault{p}{(}\PYGdefault{n}{W}\PYGdefault{p}{,}\PYGdefault{n}{s}\PYGdefault{p}{)}
+\end{Verbatim}

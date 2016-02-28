@@ -1,5 +1,4 @@
-
-from util import *
+import util
 from joblib import Parallel, delayed
 import matplotlib.pyplot as plt
 import multiprocessing

@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{tokenlizer}\PYGdefault{p}{(}\PYGdefault{n}{text}\PYGdefault{p}{):}
+\PYGdefault{l+s+sd}{\PYGdefaultZsq{}\PYGdefaultZsq{}\PYGdefaultZsq{}}
+\PYGdefault{l+s+sd}{converts a list of words into bag\PYGdefaultZhy{}of\PYGdefaultZhy{}words}
+
+\PYGdefault{l+s+sd}{Args:}
+\PYGdefault{l+s+sd}{text: a list of words}
+
+\PYGdefault{l+s+sd}{Returns: a dictionary/ hash table of text}
+\PYGdefault{l+s+sd}{\PYGdefaultZsq{}\PYGdefaultZsq{}\PYGdefaultZsq{}}
+	\PYGdefault{n}{res} \PYGdefault{o}{=} \PYGdefault{n}{Counter}\PYGdefault{p}{()}
+	\PYGdefault{k}{for} \PYGdefault{n}{i} \PYGdefault{o+ow}{in} \PYGdefault{n}{text}\PYGdefault{p}{:}
+		\PYGdefault{n}{res}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{]} \PYGdefault{o}{+=}\PYGdefault{l+m+mi}{1}
+\PYGdefault{k}{return} \PYGdefault{n}{res}
+\end{Verbatim}
