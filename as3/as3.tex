@@ -86,7 +86,7 @@
 \newcommand{\hmwkAuthorName}{Yuhao Zhao}
 \newcommand{\hmwknetid}{Yz3085}
 \newcommand{\hmwksubtitle}{SVM and Sentiment Analysis}
-
+\newcommand{\gihub}{See complete code 00at: \textit{git@github.com:cryanzpj/1003.git}}
 %
 % Title Page
 %
@@ -96,11 +96,15 @@
     \textmd{\textbf{\hmwkClass:\ \hmwkTitle \\ \hmwksubtitle }}\\
     \vspace{1in}
     \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
-    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}\\
     \vspace{3in}
+    \author{\textbf{\hmwkAuthorName} \\ \textbf{\hmwknetid }\\ }
+    \vspace{0.2in}
+    \gihub
 }
 
-\author{\textbf{\hmwkAuthorName} \\ \textbf{\hmwknetid }}
+
+
 \date{}
 
 \renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
@@ -251,7 +255,7 @@ return res
 
 \section{6. Support Vector Machine via Pegasos}
 
-\begin{problem}{3.1}
+\begin{problem}{6.1}
 \end{problem}
 Since the objective function is :
 $$L = \frac{\lambda}{2} ||w||^2 + \frac{1}{m} \sum max\{0,1-y_iw^Tx_i\}$$
@@ -268,7 +272,7 @@ w_i - \eta_i ( \lambda w_i-y_ix_i ) = (1- \eta_i\lambda)w_i + \eta_iy_ix_i, othe
 \end{cases}$$
 This update is identical to the pseudocode. \\
 
-\begin{problem}{3.2}
+\begin{problem}{6.2}
 \end{problem}
 \begin{minted}{python}
 def pegasos_svm_sgd(X,y,lambda_ = 10,n_ite = 1,print_time = False):
@@ -307,7 +311,7 @@ if print_time:
 return w
 \end{minted}
 
-\begin{problem}{3.3}
+\begin{problem}{6.3}
 \end{problem}
 Since $s_{t+1} = (1-\eta_t \lambda)s_t, w= sW$:\\
 Our new update rule is :
@@ -382,13 +386,13 @@ return scale(W,s)
 \end{minted}
 
 
-\begin{problem}{3.4}
+\begin{problem}{6.4}
 \end{problem}
 
 \begin{minted}{python}
 >>> pegasos_svm_sgd(X_train,y_train,1,1,print_time = True)  
 41.4353728294
->>>w2 = pegasos_svm_sgd_2(X_train,y_train,1,1,print_time = True) # 0.38 s
+>>>w2 = pegasos_svm_sgd_2(X_train,y_train,1,1,print_time = True) 
 0.291805028915
 >>> Counter(w2).most_common(3)
 [('bad', 0.1485676215856098), ('have', 0.06826211585894239), ('any', 0.08860759493670896)]
@@ -399,7 +403,7 @@ return scale(W,s)
 
 The first algorithm takes 41 s to do 1 iteration and the second takes only 0.292s. And the two algorithms returns a similar weight. As we can see, the most 2 heavily weighted words in w1 and w2 are the similar, while the third are not.\\
 
-\begin{problem}{3.5}
+\begin{problem}{6.5}
 	\end{problem}
 \begin{minted}{python}
 def loss_0_1(X,y,w):
@@ -419,7 +423,7 @@ return np.mean(map(lambda t: 0 if t>0 else 1, np.array(map(lambda t: dotProduct(
 
 \end{minted}
 
-\begin{problem}{3.6}
+\begin{problem}{6.6}
 \end{problem}
 
 \begin{minted}{python}
@@ -431,17 +435,130 @@ return np.mean(map(lambda t: 0 if t>0 else 1, np.array(map(lambda t: dotProduct(
 >>> loss_list
 array([ 0.218,  0.21 ,  0.22 ,  0.204,  0.204,  0.226,  0.288,  0.23 ,
 0.246,  0.346,  0.526,  0.526,  0.526])
->> try_list_2
-array([ 0.202,  0.21 ,  0.222,  0.204,  0.22 ,  0.22 ,  0.212,  0.216,
-0.22 ,  0.206,  0.214,  0.206,  0.226,  0.208,  0.206,  0.312,
-0.21 ,  0.206,  0.218,  0.22 ])
->> lambda_opt = try_list_2[np.where(loss_list_2 == min(loss_list_2))[0][0]]
+>>> try_list_2 = np.power(10.0,np.linspace(-5,-4,20))
+    loss_list_2 = np.zeros(20)
+    for i,j in enumerate(try_list_2):
+	    w = pegasos_svm_sgd_2(X_train,y_train,lambda_ = j,n_ite = 40)
+	    loss_list_2[i] = loss_0_1(X_test,y_test,w)
+>>> lambda_opt = try_list_2[np.where(loss_list_2 == min(loss_list_2))[0][0]]
 w_opt = pegasos_svm_sgd_2(X_train,y_train,lambda_ = lambda_opt,n_ite = 20)
->> lambda_opt
-1.0000000000000001e-05
+>>> lambda_opt
+4.2813323987193957e-05
 \end{minted}
 
-The best regularization that gives the lowest loss is $10^{-5}$
+The best regularization that gives the lowest loss is $4.28 \times 10^{-5}$
+
+\pagebreak
+
+\begin{problem}{6.7}
+\end{problem}
+\begin{minted}{python}
+ X = np.array(map(lambda a: tokenlizer(a) , X_test),dtype = object)
+ y = y_test
+ score = np.abs(np.array(map(lambda t: dotProduct(w_opt,t),X)))
+ error =np.array( map(lambda t: 0 if t>0 else 1,
+			  np.array(map(lambda t: dotProduct(w,t),X))*y))
+ score_list = np.array([score,error]).T
+ score_list_sorted = score_list[score_list[:,0].argsort()]
+ temp =np.linspace(np.min(score),np.max(score),7)
+ index = map(lambda i:np.where(score_list_sorted[:,0] <= i )[0][-1] ,temp)
+ range_by_index = score_list_sorted[index][:,0]
+ error_by_index = map(lambda i:np.mean(score_list_sorted[:,1][index[i]:index[i+1]])
+			,[0,1,2,3,4,5])
+ new_xstick = map(lambda i: str(range_by_index[i])[0:5]+
+			  ' to ' +  str(range_by_index[i+1])[0:5] ,[0,1,2,3,4,5])
+ 
+ plt.close('all')
+ fig =plt.figure()
+ ax1 = fig.add_subplot(111
+ ax1.bar([3,6,9,12,15,18],error_by_index)
+ sti_loc = np.array([3,6,9,12,15,18])+0.5
+ ax1.set_xticks(sti_loc)
+ ax1.set_xticklabels(new_xstick,size = 'x-small')
+ ax1.set_xlim([1,19])
+ ax1.set_xlabel("magnitude of the absolute score")
+ ax1.set_ylabel('percentage error')
+ plt.show()
+ \end{minted}
+\begin{center}
+	\includegraphics[width = 4in]{6_7.png}
+\end{center}
+
+From the plot we can see that, as the absolute magnitude increases, the percentage error decreases. For magnitude grater than  212.2 the algorithm gives perfect predictions.//
+
+\pagebreak
+
+\begin{problem}{6.8}
+\end{problem}
+
+
+\begin{minted}{python}
+>>> pegasos_svm_sgd_2(X_train,y_train,lambda_ = lambda_opt,n_ite = 40,counter = True)
+>>> 1.66666666667e-05
+\end{minted} 
+
+From the output, the non-differentiable case on occurs 1.666e-03 \% of the time. We can't skip the up date when $w^Tx_i = 0$. Since we initialized the weight to be 0, the first update will encounter the non-differentiable case. If we don't update the weight, the weight will be zero all the time. If we reinitialize the weight to be an non-zero vector, the skip might be feasible. 
+
+\section{7 Error Analysis}
+
+\begin{minted}{python}
+def list_feature(X,w,n):
+'''
+show n heavily features of input x weight w
+
+Args:
+X: input data
+w: weightes
+n: number of features to be displayed
+
+Returns: 4 by n array, r1:word, r2:number cotained in input, r3:weight, r4:contribution
+
+'''
+temp = Counter()
+for i,j in w.items():
+	temp[i] = abs(j*X[i])
+res = np.zeros((4,n),dtype=object)
+for k,i in enumerate(temp.most_common(n)):
+	res[:,k] = i[0],X[i[0]],w[i[0]],abs(X[i[0]] *w[i[0]])
+return res
+
+>>> error_list = np.where(np.array(prediction) ==1)[0][:4]
+>>> txt_error = X[error_list]
+>>> res = []
+>>> for i in txt_error:
+   	 res.append(list_feature(i,w_opt,5))
+    res = np.array(res)
+>>> res
+array([[['and', 'of', 'on', 'one', 'to'],
+[22, 27, 8, 9, 20],
+[-2.1177179750176767, -1.4637168356740076, 4.2042930386380801,
+-3.6437206334863519, 1.4948597470713196],
+[46.589795450388884, 39.520354563198204, 33.634344309104641,
+32.793485701377165, 29.897194941426392]],
+
+[['and', 'of', 'queen', 'on', 'to'],
+[20, 16, 8, 4, 11],
+[-2.1177179750176767, -1.4637168356740076, -2.6471474687721237,
+4.2042930386380801, 1.4948597470713196],
+[42.354359500353532, 23.419469370784121, 21.17717975017699,
+16.817172154552321, 16.443457217784516]],
+
+[['and', 'of', 'this', 'to', 'in'],
+[25, 23, 14, 17, 16],
+[-2.1177179750176767, -1.4637168356740076, 2.0242892408257243,
+1.4948597470713196, -1.4948597470713221],
+[52.94294937544192, 33.665487220502172, 28.340049371560141,
+25.412615700212434, 23.917755953141153]],
+
+[['only', 'and', 'on', 'to', 'in'],
+[4, 13, 6, 15, 13],
+[7.0382979757941211, -2.1177179750176767, 4.2042930386380801,
+1.4948597470713196, -1.4948597470713221],
+[28.153191903176484, 27.530333675229798, 25.225758231828479,
+22.422896206069794, 19.433176711927189]]], dtype=object)
+\end{minted}
+
+From the above 4 examples that the model got wrong, we notice that the words which contribute the most are meaningless in the classification. Words such as 'and', 'of', 'on' are not explaining the text and thus are not good features even though the have large contributions. 
 
 
 
