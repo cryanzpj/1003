@@ -1,7 +1,7 @@
 from util import *
 from joblib import Parallel, delayed
 import matplotlib.pyplot as plt
-import multiprocessing
+from multiprocessing import Pool
 import os
 import numpy as np
 import pickle
@@ -179,6 +179,27 @@ def list_feature(X,w,n):
         res[:,k] = i[0],X[i[0]],w[i[0]],abs(X[i[0]] *w[i[0]])
     return res
 
+def remover(x,sw):
+    res = []
+    for i in x:
+        if i not in sw:
+            res.append(i)
+    return res
+
+def remover_2(x,sw):
+    res = []
+    n = len(x)-1
+    i=0
+    negative = ['not',"aren't","isn't","doesn't","don't","didn't","hasn't","haven't","shoulden't","wouldn't","won't"]
+    while i <= n:
+        cur = x[i]
+        if (cur not in sw) and (cur != 'not'):
+            res.append(cur)
+        elif cur == 'not' and i !=n:
+            res.append(cur+'_'+x[i+1])
+            i+=1
+        i+=1
+    return res
 if __name__ == '__main__':
 
     X_train = np.load("X_train.npy")
@@ -248,4 +269,53 @@ if __name__ == '__main__':
     for i in txt_error:
         res.append(list_feature(i,w_opt,5))
     res = np.array(res)
-    #8
+
+
+    ################8.1
+
+    from nltk.corpus import stopwords
+    stopwords = stopwords.words("english")
+
+    X_train_new =np.array(map(lambda x:remover(x,sw = stopwords),X_train))
+
+
+    loss_list_3 = np.zeros(20)
+    for i,j in enumerate(try_list_2):
+        w = pegasos_svm_sgd_2(X_train_new,y_train,lambda_= j,n_ite=20)
+        loss_list_3[i] = loss_0_1(X_test,y_test,w)
+
+
+    ##################8.2
+    X_train_2 = np.array(map(lambda x:remover_2(x,sw = stopwords),X_train))
+    loss_list_4 = np.zeros(20)
+    for i,j in enumerate(try_list_2):
+        w = pegasos_svm_sgd_2(X_train_2,y_train,lambda_= j,n_ite=40)
+        loss_list_4[i] = loss_0_1(X_test,y_test,w)
+
+    ###8.3
+    def list_to_str(x):
+        res = ""
+        for i in x:
+            res+= (i + ' ')
+
+        return res
+
+    from  sklearn.feature_extraction.text import CountVectorizer
+
+    str_list_train= map(lambda x:list_to_str(x), X_train)
+    str_list_test = map(lambda x:list_to_str(x), X_test)
+    data_mat = CountVectorizer(analyzer= 'word',stop_words = 'english')
+    data_mat = data_mat.fit_transform(str_list_train)
+    data_mat = data_mat.toarray()
+
+    import scipy.ndimage.filters as fi
+    def g_ker(x,w,s):
+        return np.exp(np.linalg.norm(w-x)**2/(-2*s^2))
+
+    Kernel = np.identity(1500)
+    for i in range(1500):
+        for j in range(i+1,1500):
+            temp = g_ker(data_mat[i],data_mat[j],10)
+            Kernel[i,j] = temp
+            Kernel[j,i] = temp
+

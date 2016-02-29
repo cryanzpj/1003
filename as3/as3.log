@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  26 FEB 2016 17:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  28 FEB 2016 17:46
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -894,18 +894,18 @@ File: tikzlibrarypositioning.code.tex 2008/10/06 v3.0.0 (rcs-revision 1.7)
  (./as3.aux)
 \openout1 = `as3.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 149.
-LaTeX Font Info:    ... okay on input line 149.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 153.
+LaTeX Font Info:    ... okay on input line 153.
 
 ABD: EveryShipout initializing macros
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
@@ -940,19 +940,19 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \c@lstlisting=\count163
-LaTeX Font Info:    Try loading font information for U+msa on input line 151.
+LaTeX Font Info:    Try loading font information for U+msa on input line 155.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 151.
+LaTeX Font Info:    Try loading font information for U+msb on input line 155.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 167--169
+Underfull \hbox (badness 10000) in paragraph at lines 171--173
 
  []
 
@@ -970,7 +970,7 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 
 (./_minted-as3/02219151767B3F3EA1593A1DD8F091D94E1DD7EF40AEEE36F178CFDA9329122C
 .pygtex) [3]
-Underfull \hbox (badness 10000) in paragraph at lines 268--270
+Underfull \hbox (badness 10000) in paragraph at lines 272--274
 
  []
 
@@ -979,7 +979,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 268--270
 
 (./_minted-as3/8541797B59D0139128FEFCA25A6116114E1DD7EF40AEEE36F178CFDA9329122C
 .pygtex [4])
-Underfull \hbox (badness 10000) in paragraph at lines 319--320
+Underfull \hbox (badness 10000) in paragraph at lines 323--324
 
  []
 
@@ -988,7 +988,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 319--320
 
 (./_minted-as3/DD1B917AF179289E94AB9963B8A172F44E1DD7EF40AEEE36F178CFDA9329122C
 .pygtex
-Underfull \hbox (badness 10000) in paragraph at lines 321--1
+Underfull \hbox (badness 10000) in paragraph at lines 325--1
 
  []
 
@@ -996,9 +996,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 321--1
 \openout4 = `as3.pyg'.
 
 
-(./_minted-as3/D98D57E26E84ECD8212C53639C32B24C4E1DD7EF40AEEE36F178CFDA9329122C
+(./_minted-as3/3AB7A87C704B619B561F0BF094813D824E1DD7EF40AEEE36F178CFDA9329122C
 .pygtex)
-Underfull \hbox (badness 10000) in paragraph at lines 400--401
+Underfull \hbox (badness 10000) in paragraph at lines 404--405
 
  []
 
@@ -1011,36 +1011,74 @@ Underfull \hbox (badness 10000) in paragraph at lines 400--401
 \openout4 = `as3.pyg'.
 
 
-(./_minted-as3/B62A6D16AC6E9DD9B77922D348DE40984E1DD7EF40AEEE36F178CFDA9329122C
+(./_minted-as3/C72A21A1EB2E996577DE7ACF16C7AD6B4E1DD7EF40AEEE36F178CFDA9329122C
+.pygtex) [7]
+\openout4 = `as3.pyg'.
+
+
+(./_minted-as3/6B0CDCF527FD6FBB3334A4E7E4E936664E1DD7EF40AEEE36F178CFDA9329122C
+.pygtex) <6_7.png, id=42, 578.16pt x 433.62pt>
+File: 6_7.png Graphic file (type png)
+ <use 6_7.png>
+Package pdftex.def Info: 6_7.png used on input line 484.
+(pdftex.def)             Requested size: 289.07999pt x 216.80946pt.
+ [8 <./6_7.png>]
+\openout4 = `as3.pyg'.
+
+
+(./_minted-as3/75C7F71743171F0054FCFF5F401E9D864E1DD7EF40AEEE36F178CFDA9329122C
 .pygtex)
+\openout4 = `as3.pyg'.
+
+
+(./_minted-as3/C59183476BF30776978E801DA12CBECA4E1DD7EF40AEEE36F178CFDA9329122C
+.pygtex [9])
+\openout4 = `as3.pyg'.
+
+
+(./_minted-as3/F9C614486356E98594A35DBAC395088C4E1DD7EF40AEEE36F178CFDA9329122C
+.pygtex) [10]
+\openout4 = `as3.pyg'.
+
+runsystem(pygmentize -l python -f latex -F tokenmerge -P style=default -P comma
+ndprefix=PYGdefault -o "_minted-as3/09500C00E056D3669E7550F29F31E7CB4E1DD7EF40A
+EEE36F178CFDA9329122C.pygtex" "as3.pyg" )...executed.
+
+
+(./_minted-as3/09500C00E056D3669E7550F29F31E7CB4E1DD7EF40AEEE36F178CFDA9329122C
+.pygtex)
+runsystem(rm "_minted-as3/4C53CD5BEFA7A6ACB9C4819C777224574E1DD7EF40AEEE36F178C
+FDA9329122C.pygtex")...executed.
+
 runsystem(rm "as3.pyg")...executed.
 
- [7] (./as3.aux) ) 
+ [11] (./as3.aux) ) 
 Here is how much of TeX's memory you used:
- 17476 strings out of 493089
- 339383 string characters out of 6134842
- 429267 words of memory out of 5000000
- 20579 multiletter control sequences out of 15000+600000
+ 17504 strings out of 493089
+ 341095 string characters out of 6134842
+ 429723 words of memory out of 5000000
+ 20589 multiletter control sequences out of 15000+600000
  12792 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,11n,66p,820b,435s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmitt10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmmi7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.
-pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
-fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on as3.pdf (7 pages, 159624 bytes).
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmex10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmitt10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmmi10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+7.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.p
+fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pf
+b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><
+/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on as3.pdf (11 pages, 205174 bytes).
 PDF statistics:
- 83 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 102 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

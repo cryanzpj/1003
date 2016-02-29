@@ -560,9 +560,65 @@ array([[['and', 'of', 'on', 'one', 'to'],
 
 From the above 4 examples that the model got wrong, we notice that the words which contribute the most are meaningless in the classification. Words such as 'and', 'of', 'on' are not explaining the text and thus are not good features even though the have large contributions. 
 
+\section{8 Features}
+\begin{sub}{8.1 Removing stop words}
+\end{sub}
 
+\begin{minted}{python}
+def remover(x,sw):
+	res = []
+	for i in x:
+		if i not in sw:
+			res.append(i)
+	return res
 
+from nltk.corpus import stopwords
+stopwords = stopwords.words("english")
 
+X_train_new =np.array(map(lambda x:remover(x,sw = stopwords),X_train))
+
+loss_list_3 = np.zeros(20)
+for i,j in enumerate(try_list_2):
+	w = pegasos_svm_sgd_2(X_train_new,y_train,lambda_= j,n_ite=20)
+loss_list_3[i] = loss_0_1(X_test,y_test,w)
+
+>>> loss_list_3
+>>> array([ 0.2  ,  0.198,  0.2  ,  0.21 ,  0.18 ,  0.202,  0.206,  0.202,
+0.206,  0.21 ,  0.2  ,  0.186,  0.194,  0.186,  0.198,  0.179,
+0.192,  0.2  ,  0.202,  0.202])
+\end{minted}
+
+After removing the stop words in the text defined by nltk English Stopwords, and classify using svm, the best testing error was 0.179 which is slightly better than the previous model 
+
+\pagebreak
+
+\begin{sub}{8.2 Combine negations}
+\end{sub}
+
+\begin{minted}{python}
+def remover_2(x,sw):
+	res = []
+	n = len(x)-1
+	i=0
+	negative = ['not',"aren't","isn't","doesn't","don't","didn't","hasn't"
+			,"haven't","shoulden't","wouldn't","won't"]
+	while i <= n:
+		cur = x[i]
+		if (cur not in sw) and (cur != 'not'):
+			res.append(cur)
+		elif cur == 'not' and i !=n:
+			res.append(cur+'_'+x[i+1])
+			i+=1
+		i+=1
+	return res
+>>> X_train_2 = np.array(map(lambda x:remover_2(x,sw = stopwords),X_train))
+>>> loss_list_4
+array([ 0.208,  0.22 ,  0.186,  0.196,  0.222,  0.206,  0.2  ,  0.22 ,
+0.21 ,  0.19 ,  0.198,  0.22 ,  0.2  ,  0.202,  0.208,  0.212,
+0.184,  0.19 ,  0.206,  0.214])
+\end{minted}
+
+After combining the negation word with the word behind it and using it as a new features. The best testing error is 0.184
 \end{document}
 
 

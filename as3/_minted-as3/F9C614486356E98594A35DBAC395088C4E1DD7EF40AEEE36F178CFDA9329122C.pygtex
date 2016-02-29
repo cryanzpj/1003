@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGdefault{k}{def} \PYGdefault{n+nf}{remover}\PYGdefault{p}{(}\PYGdefault{n}{x}\PYGdefault{p}{,}\PYGdefault{n}{sw}\PYGdefault{p}{):}
+	\PYGdefault{n}{res} \PYGdefault{o}{=} \PYGdefault{p}{[]}
+	\PYGdefault{k}{for} \PYGdefault{n}{i} \PYGdefault{o+ow}{in} \PYGdefault{n}{x}\PYGdefault{p}{:}
+		\PYGdefault{k}{if} \PYGdefault{n}{i} \PYGdefault{o+ow}{not} \PYGdefault{o+ow}{in} \PYGdefault{n}{sw}\PYGdefault{p}{:}
+			\PYGdefault{n}{res}\PYGdefault{o}{.}\PYGdefault{n}{append}\PYGdefault{p}{(}\PYGdefault{n}{i}\PYGdefault{p}{)}
+	\PYGdefault{k}{return} \PYGdefault{n}{res}
+
+\PYGdefault{k+kn}{from} \PYGdefault{n+nn}{nltk.corpus} \PYGdefault{k+kn}{import} \PYGdefault{n}{stopwords}
+\PYGdefault{n}{stopwords} \PYGdefault{o}{=} \PYGdefault{n}{stopwords}\PYGdefault{o}{.}\PYGdefault{n}{words}\PYGdefault{p}{(}\PYGdefault{l+s}{\PYGdefaultZdq{}english\PYGdefaultZdq{}}\PYGdefault{p}{)}
+
+\PYGdefault{n}{X\PYGdefaultZus{}train\PYGdefaultZus{}new} \PYGdefault{o}{=}\PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{array}\PYGdefault{p}{(}\PYGdefault{n+nb}{map}\PYGdefault{p}{(}\PYGdefault{k}{lambda} \PYGdefault{n}{x}\PYGdefault{p}{:}\PYGdefault{n}{remover}\PYGdefault{p}{(}\PYGdefault{n}{x}\PYGdefault{p}{,}\PYGdefault{n}{sw} \PYGdefault{o}{=} \PYGdefault{n}{stopwords}\PYGdefault{p}{),}\PYGdefault{n}{X\PYGdefaultZus{}train}\PYGdefault{p}{))}
+
+\PYGdefault{n}{loss\PYGdefaultZus{}list\PYGdefaultZus{}3} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{zeros}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{20}\PYGdefault{p}{)}
+\PYGdefault{k}{for} \PYGdefault{n}{i}\PYGdefault{p}{,}\PYGdefault{n}{j} \PYGdefault{o+ow}{in} \PYGdefault{n+nb}{enumerate}\PYGdefault{p}{(}\PYGdefault{n}{try\PYGdefaultZus{}list\PYGdefaultZus{}2}\PYGdefault{p}{):}
+	\PYGdefault{n}{w} \PYGdefault{o}{=} \PYGdefault{n}{pegasos\PYGdefaultZus{}svm\PYGdefaultZus{}sgd\PYGdefaultZus{}2}\PYGdefault{p}{(}\PYGdefault{n}{X\PYGdefaultZus{}train\PYGdefaultZus{}new}\PYGdefault{p}{,}\PYGdefault{n}{y\PYGdefaultZus{}train}\PYGdefault{p}{,}\PYGdefault{n}{lambda\PYGdefaultZus{}}\PYGdefault{o}{=} \PYGdefault{n}{j}\PYGdefault{p}{,}\PYGdefault{n}{n\PYGdefaultZus{}ite}\PYGdefault{o}{=}\PYGdefault{l+m+mi}{20}\PYGdefault{p}{)}
+\PYGdefault{n}{loss\PYGdefaultZus{}list\PYGdefaultZus{}3}\PYGdefault{p}{[}\PYGdefault{n}{i}\PYGdefault{p}{]} \PYGdefault{o}{=} \PYGdefault{n}{loss\PYGdefaultZus{}0\PYGdefaultZus{}1}\PYGdefault{p}{(}\PYGdefault{n}{X\PYGdefaultZus{}test}\PYGdefault{p}{,}\PYGdefault{n}{y\PYGdefaultZus{}test}\PYGdefault{p}{,}\PYGdefault{n}{w}\PYGdefault{p}{)}
+
+\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}} \PYGdefault{n}{loss\PYGdefaultZus{}list\PYGdefaultZus{}3}
+\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}} \PYGdefault{n}{array}\PYGdefault{p}{([} \PYGdefault{l+m+mf}{0.2}  \PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.198}\PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.2}  \PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.21} \PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.18} \PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.202}\PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.206}\PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.202}\PYGdefault{p}{,}
+\PYGdefault{l+m+mf}{0.206}\PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.21} \PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.2}  \PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.186}\PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.194}\PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.186}\PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.198}\PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.179}\PYGdefault{p}{,}
+\PYGdefault{l+m+mf}{0.192}\PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.2}  \PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.202}\PYGdefault{p}{,}  \PYGdefault{l+m+mf}{0.202}\PYGdefault{p}{])}
+\end{Verbatim}
