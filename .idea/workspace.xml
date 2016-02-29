@@ -2,21 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e73541f-5b25-4ca6-85f9-7f6a000c760e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/as3.pdf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/as3.synctex.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/_minted-as3/02219151767B3F3EA1593A1DD8F091D94E1DD7EF40AEEE36F178CFDA9329122C.pygtex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/_minted-as3/8541797B59D0139128FEFCA25A6116114E1DD7EF40AEEE36F178CFDA9329122C.pygtex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/_minted-as3/B62A6D16AC6E9DD9B77922D348DE40984E1DD7EF40AEEE36F178CFDA9329122C.pygtex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/_minted-as3/CC52420F2CBAC4064D86B16C9D41C6774E1DD7EF40AEEE36F178CFDA9329122C.pygtex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/_minted-as3/D94F389BE7F8C87A0D067799764C20424E1DD7EF40AEEE36F178CFDA9329122C.pygtex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/_minted-as3/D98D57E26E84ECD8212C53639C32B24C4E1DD7EF40AEEE36F178CFDA9329122C.pygtex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/_minted-as3/DD1B917AF179289E94AB9963B8A172F44E1DD7EF40AEEE36F178CFDA9329122C.pygtex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/_minted-as3/default.pygstyle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/as3.aux" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/as3.log" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/as3.tex" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/as3/web_extractor.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/6_7.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/as3/_minted-as3/B62A6D16AC6E9DD9B77922D348DE40984E1DD7EF40AEEE36F178CFDA9329122C.pygtex" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/as3/_minted-as3/D98D57E26E84ECD8212C53639C32B24C4E1DD7EF40AEEE36F178CFDA9329122C.pygtex" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3/as3.pdf" afterPath="$PROJECT_DIR$/as3/as3.pdf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3/as3.synctex.gz" afterPath="$PROJECT_DIR$/as3/as3.synctex.gz" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3/a3.py" afterPath="$PROJECT_DIR$/as3/a3.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3/as3.aux" afterPath="$PROJECT_DIR$/as3/as3.aux" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3/as3.log" afterPath="$PROJECT_DIR$/as3/as3.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/as3/as3.tex" afterPath="$PROJECT_DIR$/as3/as3.tex" />
     </list>
     <ignored path="github.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,26 +40,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/as3/util.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="a3.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/as3/a3.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.09090909">
-              <caret line="184" column="34" selection-start-line="184" selection-start-column="34" selection-end-line="184" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.45454547">
+              <caret line="297" column="19" selection-start-line="297" selection-start-column="19" selection-end-line="297" selection-end-column="19" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#198#341#1" expanded="false" />
-                <element signature="e#622#717#1" expanded="false" />
-                <element signature="e#3101#3234#1" expanded="false" />
+                <element signature="e#0#18#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="util.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/as3/util.py">
+      <file leaf-file-name="wordvec.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../Course/DS-GA1001/1001project/code/wordvec.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -85,12 +87,13 @@
         <option value="cryan &lt;cryanzpj@gmail&gt;" />
       </list>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/as3" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/as3/util.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/as3/load.py" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/as3/a3.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/../../Course/capital/web_extractor.py" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -116,7 +119,7 @@
       <profile-state />
     </entry>
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -162,7 +165,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="946" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FullScreen" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -493,9 +496,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.062133648" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38819444" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38819444" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -531,7 +534,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="23" />
+      <option name="time" value="29" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -548,10 +551,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#198#341#1" expanded="false" />
-            <element signature="e#622#717#1" expanded="false" />
-            <element signature="e#3101#3234#1" expanded="false" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -576,10 +576,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#198#341#1" expanded="false" />
-            <element signature="e#622#717#1" expanded="false" />
-            <element signature="e#3101#3234#1" expanded="false" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -604,10 +601,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#198#341#1" expanded="false" />
-            <element signature="e#622#717#1" expanded="false" />
-            <element signature="e#3101#3234#1" expanded="false" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -655,13 +649,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../Course/DS-GA1001/1001project/code/wordvec.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/as3/web_extractor.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -697,31 +684,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/as3/util.py">
+    <entry file="file://$PROJECT_DIR$/../../Course/capital/web_extractor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.72727275">
+          <caret line="113" column="50" selection-start-line="113" selection-start-column="50" selection-end-line="113" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/as3/as3/a3.py">
+    <entry file="file://$PROJECT_DIR$/as3/util.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12727273">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="8" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="9" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Course/DS-GA1001/1001project/code/wordvec.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/as3/a3.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09090909">
-          <caret line="184" column="34" selection-start-line="184" selection-start-column="34" selection-end-line="184" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.45454547">
+          <caret line="297" column="19" selection-start-line="297" selection-start-column="19" selection-end-line="297" selection-end-column="19" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#198#341#1" expanded="false" />
-            <element signature="e#622#717#1" expanded="false" />
-            <element signature="e#3101#3234#1" expanded="false" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
