@@ -302,20 +302,62 @@ if __name__ == '__main__':
 
     from  sklearn.feature_extraction.text import CountVectorizer
 
-    str_list_train= map(lambda x:list_to_str(x), X_train)
-    str_list_test = map(lambda x:list_to_str(x), X_test)
+    str_list= map(lambda x:list_to_str(x), X_train)
+    str_list.extend(map(lambda x:list_to_str(x), X_test))
     data_mat = CountVectorizer(analyzer= 'word',stop_words = 'english')
-    data_mat = data_mat.fit_transform(str_list_train)
+    data_mat = data_mat.fit_transform(str_list)
     data_mat = data_mat.toarray()
 
-    import scipy.ndimage.filters as fi
+    data_mat_train = data_mat[:1500,:]
+    data_mat_test = data_mat[1500:,:]
+
     def g_ker(x,w,s):
         return np.exp(np.linalg.norm(w-x)**2/(-2*s^2))
 
     Kernel = np.identity(1500)
     for i in range(1500):
         for j in range(i+1,1500):
-            temp = g_ker(data_mat[i],data_mat[j],10)
+            temp = g_ker(data_mat_train[i],data_mat_train[j],1)
             Kernel[i,j] = temp
             Kernel[j,i] = temp
+
+
+    def Kernel_svm(K,y,lambda_=1,n_ite=10):
+        num_instances =K.shape[0]
+        w = np.zeros(n_feature)
+        n=0.0
+        t=1.0
+        while n < n_ite:
+            generator = np.random.permutation(list(xrange(num_instances))) # define ramdom sampling sequence
+            for i in generator:
+                t+=1
+                eta = 1/(t)
+                temp = np.dot(w,K)
+                if 1- temp[i]*y[i] <=0:
+                    w = w - eta * (lambda_ *temp)
+                else:
+                    w = w - eta *(lambda_*temp - y[i]*K[i,:] )
+            n+=1
+
+        return w
+
+    def error_kernel(K,x,x_test,y,w,s):
+        temp =np.array(map(lambda i: np.sum(np.array(map(lambda j:g_ker(x[j],x_test[i],s),list(xrange(1500)))) * w),list(xrange(500))))*y
+        return np.mean(np.array(map(lambda t: 1 if t<0 else 0 ,temp)))
+
+
+    t = Kernel_svm(Kernel,y_train,lambda_ = 0.001,n_ite=20)
+
+    try_list = np.power(10.0,list(range(-6,0)))
+    loss_list = np.zeros(6)
+    for i,j in enumerate(try_list):
+        w = Kernel_svm(Kernel,y_train,lambda_ = j,n_ite = 20)
+        loss_list[i] = error_kernel(Kernel,data_mat_train,data_mat_test,y_test,w,s)
+
+    from sklearn.svm import SVC
+    clf = SVC(kernel ='rbf',C = 0.001 )
+    clf.fit(data_mat_train,y_train)
+    clf.predict(data_mat_test)
+
+
 

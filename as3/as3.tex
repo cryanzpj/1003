@@ -80,13 +80,13 @@
 %
 
 \newcommand{\hmwkTitle}{Homework 3}
-\newcommand{\hmwkDueDate}{Tuesday, Feb 29, 2016}
+\newcommand{\hmwkDueDate}{Monday, Feb 29, 2016}
 \newcommand{\hmwkClass}{DS-GA 1003}
 \newcommand{\hmwkClassInstructor}{Professor David Ronsenberg}
 \newcommand{\hmwkAuthorName}{Yuhao Zhao}
 \newcommand{\hmwknetid}{Yz3085}
 \newcommand{\hmwksubtitle}{SVM and Sentiment Analysis}
-\newcommand{\gihub}{See complete code 00at: \textit{git@github.com:cryanzpj/1003.git}}
+\newcommand{\gihub}{See complete code at: \textit{git@github.com:cryanzpj/1003.git}}
 %
 % Title Page
 %
@@ -484,7 +484,7 @@ The best regularization that gives the lowest loss is $4.28 \times 10^{-5}$
 	\includegraphics[width = 4in]{6_7.png}
 \end{center}
 
-From the plot we can see that, as the absolute magnitude increases, the percentage error decreases. For magnitude grater than  212.2 the algorithm gives perfect predictions.//
+From the plot we can see that, as the absolute magnitude increases, the percentage error decreases. For magnitude grater than  212.2 the algorithm gives perfect predictions.
 
 \pagebreak
 
@@ -619,6 +619,76 @@ array([ 0.208,  0.22 ,  0.186,  0.196,  0.222,  0.206,  0.2  ,  0.22 ,
 \end{minted}
 
 After combining the negation word with the word behind it and using it as a new features. The best testing error is 0.184
+
+\begin{sub}{8.3 RBF with Gaussian Kernel}
+\end{sub}
+
+With RBF basis, the SVM objective function is :
+$$min \frac{\lambda}{2} \alpha^TK\alpha +\frac{1}{n}  \sum (1 - y_i(K\alpha)_i)_+$$
+which $$K_{i,j} =  e^{(||w-x||^2/(-2s^2))}$$ 
+\begin{minted}{python}
+   def list_to_str(x):
+	   res = ""
+	   for i in x:
+		   res+= (i + ' ')
+   return res
+   
+   from  sklearn.feature_extraction.text import CountVectorizer
+   
+   str_list= map(lambda x:list_to_str(x), X_train)
+   str_list.extend(map(lambda x:list_to_str(x), X_test))
+   data_mat = CountVectorizer(analyzer= 'word',stop_words = 'english')
+   data_mat = data_mat.fit_transform(str_list)
+   data_mat = data_mat.toarray()
+   
+   data_mat_train = data_mat[:1500,:]
+   data_mat_test = data_mat[1500:,:]
+   
+   def g_ker(x,w,s):
+	   return np.exp(np.linalg.norm(w-x)**2/(-2*s^2))
+   
+   Kernel = np.identity(1500)
+   for i in range(1500):
+	   for j in range(i+1,1500):
+		   temp = g_ker(data_mat_train[i],data_mat_train[j],1)
+		   Kernel[i,j] = temp
+		   Kernel[j,i] = temp
+   
+   
+   def Kernel_svm(K,y,lambda_=1,n_ite=10):
+	   num_instances =K.shape[0]
+	   w = np.zeros(n_feature)
+	   n=0.0
+	   t=1.0
+	   while n < n_ite:
+		   generator = np.random.permutation(list(xrange(num_instances))) 
+		   for i in generator:
+			   t+=1
+			   eta = 1/(t)
+			   temp = np.dot(w,K)
+			   if 1- temp[i]*y[i] <=0:
+				   w = w - eta * (lambda_ *temp)
+			   else:
+				   w = w - eta *(lambda_*temp - y[i]*K[i,:] )
+		   n+=1
+   
+	   return w
+   
+   def error_kernel(K,x,x_test,y,w,s):
+	   temp =np.array(map(lambda i: np.sum(np.array(map(lambda j:g_ker(x[j],x_test[i],s)
+			   ,list(xrange(1500)))) * w),list(xrange(500))))*y
+	   return np.mean(np.array(map(lambda t: 1 if t<0 else 0 ,temp)))
+   
+
+\end{minted}
+
+By using the Gaussian RBF the best error rate in testing set is 0.179
+
+
+
+
+
+
 \end{document}
 
 
