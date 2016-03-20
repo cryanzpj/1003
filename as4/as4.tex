@@ -338,16 +338,28 @@ The minimal weighted impurity measure is obtained by splitting on the spots.  \\
 \begin{tikzpicture}
 \node (developers){Original};
 \node (probI)[below left=of developers,align=center]{Spots = N\\
-	\begin{tabular}{ccc}
-	1 & 2 & 3 \\
-	1 & 2 & 3 \\
+	\begin{tabular}{l*{4}{c}r}
+	Poisonous &Size &Spots &Color\\
+	\hline
+	N & 5 & N & White \\
+	N & 2 & N & Brown \\
+	N & 4 & N & White \\
+	N & 1 & N & Brown \\
 	\end{tabular}
 };
 
 \node (probIII)[below right=of developers,align=center]{Spots = Y\\
-	\begin{tabular}{ccc}
-	1 & 2 & 3 \\
-	1 & 2 & 3 \\
+	\begin{tabular}{l*{4}{c}r}
+	Poisonous &Size &Spots &Color\\
+	\hline
+	N & 2 &Y & White \\
+	N & 3 &Y & Brown \\
+	Y & 5 &Y & White \\
+	Y & 4 &Y & Brown \\
+	Y & 4 &Y & Brown \\
+	Y & 1 &Y & White \\
+	Y & 1 &Y & Brown \\
+	
 	\end{tabular}
 };
 % draw the connections
@@ -357,11 +369,144 @@ The minimal weighted impurity measure is obtained by splitting on the spots.  \\
 \end{tikzpicture}
 \end{center}
 
+\begin{sub}{6.1.2}
+\end{sub}
+Since the left node is already pure, we continue splitting on the right node.\\
+
+a) Split on color:\\
+i) color = white,  
+$p_1 = \frac{2}{3} ,N_1 = 3,Q_1 = \frac{4}{9},  p_2 = \frac{3}{4},N_2 = 4, Q_2= \frac{6}{16}, N_1Q_1 + N_2Q_2  \approx 2.83$\\
+
+b) Split on Size:\\
+ii) Size $\leq$ 1, $p_1 = 0 ,N_1 = 2,Q_1 = 0,  p_2 = \frac{3}{5},N_2 = 5, Q_2= \frac{12}{25}, N_1Q_1 + N_2Q_2  \approx 2.4$\\
+iii) Size $\leq$ 2, $p_1 = \frac{2}{3} ,N_1 = 3,Q_1 = \frac{4}{9},  p_2 = \frac{3}{4},N_2 = 4, Q_2= \frac{6}{16}, N_1Q_1 + N_2Q_2  \approx 2.83$\\
+iv) Size $\leq$ 3, $p_1 = \frac{2}{4} ,N_1 = 4,Q_1 = \frac{1}{2},  p_2 = 1,N_2 = 3, Q_2= 0, N_1Q_1 + N_2Q_2  \approx 2$\\
+v) Size $\leq$ 4 ,$p_1 = \frac{4}{6} ,N_1 = 6,Q_1 = \frac{4}{9},  p_2 = 1,N_2 = 1, Q_2= 0, N_1Q_1 + N_2Q_2  \approx 2.66$\\
+The minimal weighted impurity measure is obtained by splitting on the Size $\leq$ 3.  \\
+
+\begin{center}
+	\begin{tikzpicture}
+	\node (developers){Original};
+	\node (probI)[below left=of developers,align=center]{\textbf{Spots = N}\\
+		\begin{tabular}{l*{4}{c}r}
+		Poisonous &Size &Spots &Color\\
+		\hline
+		N & 5 & N & White \\
+		N & 2 & N & Brown \\
+		N & 4 & N & White \\
+		N & 1 & N & Brown \\
+		\end{tabular}
+	};
+	
+	\node (probIII)[below right=of developers,align=center]{\textbf{Spots = Y}\\
+		\begin{tabular}{l*{4}{c}r}
+		Poisonous &Size &Spots &Color\\
+		\hline
+		N & 2 &Y & White \\
+		N & 3 &Y & Brown \\
+		Y & 5 &Y & White \\
+		Y & 4 &Y & Brown \\
+		Y & 4 &Y & Brown \\
+		Y & 1 &Y & White \\
+		Y & 1 &Y & Brown \\
+		
+		\end{tabular}
+	};
+	
+	\node (probIV)[below left=of probIII,align=center]{\textbf{Size $\leq$ 3} \\
+		\begin{tabular}{l*{4}{c}r}
+		Poisonous &Size &Spots &Color\\
+		\hline
+		N & 3 &Y & Brown \\
+		N & 2 &Y & White \\
+		Y & 1 &Y & White \\
+		Y & 1 &Y & Brown \\
+		\end{tabular}
+	};
+	
+		
+		\node (probV)[below =of probIII,align=center]{\textbf{Size $>$ 3} \\
+			\begin{tabular}{l*{4}{c}r}
+			Poisonous &Size &Spots &Color\\
+			\hline
+	
+		Y & 5 &Y & White \\
+		Y & 4 &Y & Brown \\
+		Y & 4 &Y & Brown \\
+
+			\end{tabular}
+		};
+		
+	
+	
+
+	% draw the connections
+	\draw[->] (developers)--(probI);
+	%\draw[->] (developers)--(probII);
+	\draw[->] (developers)--(probIII);
+	\draw[->] (probIII)--(probIV);
+	\draw[->] (probIII)--(probV);
+	
+	\end{tikzpicture}
+\end{center}
+
+Let region 1, 2, 3 be \{SPOT = N\}, \{SPOTS = Y, SIZE $\leq$ 3\}, \{SPOTS = N, SIZE $>$ 3\}\\
+The predicted probability of poisonous is :\\
+\begin{center}
+	
+	\begin{tabular}{l*{3}{c}r}
+		Region & Prob of Poisonous & Prob of not Poisonous \\
+		\hline
+		
+		1 & 0 \% & 100 \% \\
+		2 & 50 \% & 50 \% \\
+		1 & 100 \% & 0 \% \\		
+	\end{tabular}
+\end{center}
 
 
+\begin{sub}{6.1.3}
+\end{sub}
+
+In the given dataset, the three features are binary, there will be at most 8 nodes. If we build the tree until all nodes are either pure or cannot be split further, the error will occurs on the data that have the same feature values but different Y values. In the given dataset, the training error happens in :
+\begin{center}
+	
+	\begin{tabular}{l*{4}{c}r}
+		Y & A & B &C \\
+		\hline
+		0 & 0 & 1 & 1 \\
+		1 & 0 & 1 & 1 \\		
+	\end{tabular}   \hspace{2in}	
+		\begin{tabular}{l*{4}{c}r}
+			Y & A & B &C \\
+			\hline
+			0 & 1 & 1 & 1 \\
+			1 & 1 & 1 & 1 \\		
+		\end{tabular}	
+\end{center}
+
+There will be 2 sample incorrectly labeled, therefore, the training error is $\frac{2}{11} \approx 18.1 \%$
+
+\pagebreak
+\begin{problem}{6.2 Investigating Impurity Measures}
+\end{problem}
 
 
+\begin{sub}{6.2.1}
+\end{sub}
+
+Misclassification rates:\\
+Model A: $\frac{1}{4} \times \frac{1}{2} +\frac{1}{4} \times \frac{1}{2} = \frac{1}{4}$\\
+Model B: $\frac{2}{6} \times \frac{6}{8} +0 \times \frac{2}{8} = \frac{1}{4}$\\
+
+Cross-entropy: \\
+Model A: $-\frac{3}{4}log(\frac{3}{4})\times \frac{1}{2} - \frac{1}{4}log(\frac{1}{4})\times \frac{1}{2} \approx 0.122 $\\
+Model B: $-\frac{2}{6}log(\frac{2}{6})\times \frac{6}{8} - 1log(1)\times \frac{2}{6}\approx 0.119 $\\
+
+Gini impurity:\\
+Model A: $\frac{3}{4}\frac{1}{4}\frac{1}{2} + \frac{1}{4}\frac{3}{4}\frac{1}{2} =  \frac{3}{16} = 0.1875$\\
+Model B: $\frac{1}{3}\frac{2}{3}\frac{6}{8} + 0 =  \frac{3}{16} \approx 0.1667$\\
+
+Therefore, the Misclassification rates are identical for Model A and Model B, while the Cross-entropy and Gini impurity for Model B are less than that for Model A.
 \end{document}
-
-
 
