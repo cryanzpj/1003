@@ -500,12 +500,12 @@ Model A: $\frac{1}{4} \times \frac{1}{2} +\frac{1}{4} \times \frac{1}{2} = \frac
 Model B: $\frac{2}{6} \times \frac{6}{8} +0 \times \frac{2}{8} = \frac{1}{4}$\\
 
 Cross-entropy: \\
-Model A: $-\frac{3}{4}log(\frac{3}{4})\times \frac{1}{2} - \frac{1}{4}log(\frac{1}{4})\times \frac{1}{2} \approx 0.122 $\\
-Model B: $-\frac{2}{6}log(\frac{2}{6})\times \frac{6}{8} - 1log(1)\times \frac{2}{6}\approx 0.119 $\\
+Model A: $2(-\frac{3}{4}log(\frac{3}{4})\times \frac{1}{2}  - \frac{1}{4}log(\frac{1}{4})\times \frac{1}{2}) \approx 0.5623 $\\
+Model B: $-\frac{2}{6}log(\frac{2}{6})\times \frac{6}{8}  - \frac{4}{6}log(\frac{4}{6}) \frac{6}{8}- 1log(1)\times \frac{2}{6} - 0 \approx 0.477 $\\
 
 Gini impurity:\\
-Model A: $\frac{3}{4}\frac{1}{4}\frac{1}{2} + \frac{1}{4}\frac{3}{4}\frac{1}{2} =  \frac{3}{16} = 0.1875$\\
-Model B: $\frac{1}{3}\frac{2}{3}\frac{6}{8} + 0 =  \frac{3}{16} \approx 0.1667$\\
+Model A: $2(\frac{3}{4}\frac{1}{4}\frac{1}{2} + \frac{1}{4}\frac{3}{4}\frac{1}{2} )=  \frac{6}{16} = 0.375$\\
+Model B: $2(\frac{1}{3}\frac{2}{3}\frac{6}{8} + 0) =  \frac{2}{6} \approx 0.333$\\
 
 Therefore, the Misclassification rates are identical for Model A and Model B, while the Cross-entropy and Gini impurity for Model B are less than that for Model A.
 
@@ -579,6 +579,13 @@ Since for some $\lambda > 0, f^*  = \underset{f \in \mathcal{F}}{\operatorname{a
 \end{align}
 Let $r = \Omega(f^*) > 0$, we need to show that :\\
 $f^*$ is also a solution to $\underset{f \in \mathcal{F}}{\operatorname{argmin}}$ $\phi(f)$ s.t $\Omega(f) \leq \Omega(f^*)$\\
+
+
+Approach 1:\\
+if $f^*$ is not a optimun for Ivanov, then $\exists \hat{f}$ s.t $\phi(\hat{f}) < \phi(f^*)$, and $ \Omega(\hat{f}) \leq \Omega(f^*)$\\
+This means $\phi(\hat{f}) + \lambda \Omega(\hat{f}) < \phi(f) + \lambda \Omega(f) $, and this contradict to the fact that $f^*$ is the Tikhonov solution. Therefore, $f^*$ is also a solution to $\underset{f \in \mathcal{F}}{\operatorname{argmin}}$ $\phi(f)$ s.t $\Omega(f) \leq \Omega(f^*)$\\
+
+Approach 2:\\
 The Lagrangian to this Ivanov problem is  :
 \begin{align}
 L(f) = \phi(f) + \lambda(\Omega(f) - \Omega(f^*))
@@ -586,7 +593,7 @@ L(f) = \phi(f) + \lambda(\Omega(f) - \Omega(f^*))
 We claim that $f^*$ is a solution, by the first order condition :
 \begin{align}
 \nabla L(f^*) = \nabla \phi(f^*) + \lambda \nabla\Omega(f^*) &= 0\hspace{0.5in } \text{(from (20))}\\
-\Omega(f^*) - \omega(f^*) &= 0
+\Omega(f^*) - \Omega(f^*) &= 0
 \end{align}
 Therefore $f^*$ is also a Ivanov solution
 
@@ -605,8 +612,169 @@ L(w,\lambda) = \phi(w) + \lambda(\Omega(w) - r)
 \end{sub}
 The duel problem is :
 \begin{align}
-g(\lambda) = \underset{w}{\operatorname{inf}} L(w,\lambda) = \underset{w}{\operatorname{min}} \hspace{0.05in} \phi(w) + \lambda(\Omega(w) - r)  
+d^* = \underset{\lambda \succeq 0}{\operatorname{sup}} \hspace{0.05in} g(\lambda) = \underset{\lambda \succeq 0}{\operatorname{sup}} \hspace{0.05in} \underset{w}{\operatorname{inf}} L(w,\lambda) = \underset{\lambda \succeq 0}{\operatorname{max}} \hspace{0.05in} \underset{w}{\operatorname{min}} \hspace{0.05in} \phi(w) + \lambda(\Omega(w) - r)  
 \end{align} 
+
+\begin{sub}{8.2.3}
+\end{sub}
+Since we have $\phi(w^*) = g(\lambda^*)$, and $\lambda^* = \underset{\lambda \succeq 0}{\operatorname{argmin}} \hspace{0.05in}g(\lambda)$, we also assume strong duality:
+\begin{align}
+\phi(w^*) &=g(\lambda^*)\\ &=  \underset{w}{\operatorname{inf}} \phi(w) + \lambda^*(\Omega(w) - r)\\
+&\leq \phi(w^*) + \lambda^*(\Omega(w^*) - r)
+\end{align}
+since  $\Omega(w^*) - r \leq 0$
+\begin{align}
+RHS &\leq \phi(w^*)
+\end{align}
+LHS of (26) = RHS of (29), this means all the $\leq$ should be $=$\\
+This gives:
+\begin{align}
+ \underset{w}{\operatorname{inf}} \phi(w) + \lambda^*(\Omega(w) - r) =  \phi(w^*) + \lambda^*(\Omega(w^*) - r)
+\end{align}
+%let the minimum in $g(\lambda)$ obtained at $\hat{w}$, from complementary slackness we now that $\lambda^*(\Omega(\hat{w} - r)) = 0$
+%\begin{align}
+%\hat{w} &= \underset{w}{\operatorname{argmin}}  \hspace{0.05in}\phi(w) + \lambda^*(\Omega(w) - r)\\
+%&= \underset{w}{\operatorname{argmin}} \hspace{0.05in}\phi(w)  \\ &= w^*
+%\end{align}
+Therefore, the minimum is attained at $w^*$\\
+For $\lambda = \lambda^*$, $w^*= \underset{w}{\operatorname{argmin}} \hspace{0.05in} \phi(w) + \lambda(\Omega(w) - r)$, $- \lambda r$ is just a constant.\\
+Hence, $w^*= \underset{w \in \Re^d}{\operatorname{argmin}} \hspace{0.05in}\phi(w) + \lambda \Omega(w) $
+
+\begin{sub}{8.2.4}
+\end{sub}
+We assume $\underset{w \in \Re^d}{\operatorname{inf}} \hspace{0.05in}\phi(w)  <\underset{w \in \Re^d ,\Omega(w) \leq r}{\operatorname{inf}} \hspace{0.05in}\phi(w)  $\\
+We have strong duality, which means: 
+\begin{align}
+\phi(w^*) =g(\lambda^*) =  \underset{w}{\operatorname{inf}} \phi(w) + \lambda^*(\Omega(w) - r)
+\end{align}
+if $\lambda^* = 0$, $\Omega(w) -  r \leq 0 $, the constraint is inactive 
+\begin{align}
+g(\lambda^*) &=  \underset{w \in \Re^d ,\Omega(w) \leq r}{\operatorname{inf}} \hspace{0.05in}\phi(w)\\&> \underset{w \in \Re^d }{\operatorname{inf}} \hspace{0.05in}\phi(w) = \phi(w^*)
+\end{align}
+This is a contradiction to strong duality. Thus $\lambda >0$\\
+Same as 8.2.3, we now have $w^*= \underset{w \in \Re^d}{\operatorname{argmin}} \hspace{0.05in}\phi(w) + \lambda \Omega(w) $ but  for some $\lambda >0$
+
+\begin{problem}{8.3 Ivanov implies Tikhnov for Ridge Regression}
+\end{problem}
+For Ridge:
+$$minimize \hspace{0.1in} ||Aw- y||^2$$
+$$s.t  \hspace{0.1in} ||w^2|| \leq r$$
+Both of the object function and constraint are convex.\\
+It's sufficient to show that the problem is strictly feasible ($\exists$ w, s.t.  $ ||w||^2 < r$) \\
+we can show the prof by letting $w = \vec{0}$, $||w||^2 = 0 < r$ for any positive r\\
+Therefore, The Ivanov form of Ridge is a convex optimization problem with a strictly feasible point.
+\pagebreak
+
+\section{9 Novelty Detection}
+\begin{sub}{9.1}
+\end{sub}
+$$Min \hspace{0.05in} r^2 $$
+$$s.t. \hspace{0.05in}||\phi(x_i) - c||_{\mathcal{H}}^2 \leq r^2 \hspace{0.05in} \forall i$$
+
+\begin{sub}{9.2}
+\end{sub}
+\begin{align}
+L(c,r,\lambda_i) &= r^2 + \sum \lambda_i(||\phi(x_i) - c||_{\mathcal{H}}^2 - r^2)\\
+\frac{\partial L}{\partial r} &= 2r -2r \sum \lambda_i= 0 \\
+\frac{\partial L}{\partial c} &= \sum -2 \lambda_i (\phi(x_i) - c) = 0 
+\end{align}
+From (35) and (36) we know, \begin{align}
+\sum \lambda_i = 1\\
+c = \sum \lambda_i\phi(x_i)
+\end{align}
+Therefore:
+\begin{align}
+L(c,r,\lambda_i) &= r^2 +\sum  \lambda_i||\phi(x_i) - \sum \lambda_i\phi(x_i)||_{\mathcal{H}}^2  -r^2\sum \lambda_i\\& = \sum  \lambda_i||\phi(x_i) - \sum \lambda_i\phi(x_i)||_{\mathcal{H}}^2 
+\end{align}
+Since $g(\lambda_i) = \underset{c,r}{\operatorname{inf}} \hspace{0.05in} L(c,r,\lambda_i)$, the dual is :
+\begin{align}
+d^* &=  \underset{\lambda_1,...,\lambda_n \succeq 0}{\operatorname{sup}} \hspace{0.05in} \underset{c,r}{\operatorname{inf}} \hspace{0.05in} L(c,r,\lambda_i)\\
+&=  \underset{\lambda_1,...,\lambda_n \succeq 0}{\operatorname{sup}} \hspace{0.05in} \underset{c,r}{\operatorname{inf}} \hspace{0.05in} \sum  \lambda_i||\phi(x_i) - \sum \lambda_i\phi(x_i)||_{\mathcal{H}}^2 
+\end{align}
+the prime is :
+
+\begin{align}
+ \underset{c,r}{\operatorname{inf}} \hspace{0.05in}\underset{\lambda_1,...,\lambda_n \succeq 0}{\operatorname{sup}} \hspace{0.05in} \sum  \lambda_i||\phi(x_i) - \sum \lambda_i\phi(x_i)||_{\mathcal{H}}^2 
+\end{align}
+
+\begin{sub}{9.3}
+\end{sub}
+Since both of the constraints and object function are convex, it's sufficient to show the problem is strictly feasible.\\
+let $\hat{c} = 0$, and $\hat{r}^2 = max(||\phi(x_i)||^2_\mathcal{H}) + \epsilon$ ,which $\epsilon$ is an arbitrary positive number. \\
+Then $||\phi(x_i) - \hat{c}||^2_\mathcal{H} - \hat{r}^2<0$  for any $i = 1,..., n$\\
+From Slater’s Constraint Qualifications for Strong Duality, this problem has strong duality.
+
+\begin{sub}{9.4}
+\end{sub}
+Define $k(x_i,x_j) = <\phi(x_i),\phi(x_j)>_\mathcal{H}$, and $K_{n\times n}$ be the kernel matrix
+\begin{align}
+g(\lambda) &=  \sum  \lambda_i<\phi(x_i) - \sum \lambda_j\phi(x_j),\phi(x_i) - \sum \lambda_j\phi(x_j)>_\mathcal{H}\\
+&= \sum \lambda_i ||\phi(x_i)||^2_\mathcal{H} + \sum \lambda_i\lambda_j <\phi(x_i),\phi(x_j)>_\mathcal{H} - 2\sum \lambda_i <\phi(x_i),\sum \lambda_j \phi(x_j)>_\mathcal{H}\\
+&= \sum \lambda_i ||\phi(x_i)||^2_\mathcal{H} + \sum \lambda_i\lambda_j <\phi(x_i),\phi(x_j)>_\mathcal{H} - 2\sum \lambda_i\lambda_j <\phi(x_i),\phi(x_j)>_\mathcal{H}\\
+&= \sum \lambda_i ||\phi(x_i)||^2_\mathcal{H} - \sum \lambda_i\lambda_j <\phi(x_i),\phi(x_j)>_\mathcal{H} \\
+&= \sum \lambda_i K(i,i) - \sum \lambda_i\lambda_j K(i,j) 
+\end{align}
+The dual optimization is :
+\begin{align}
+ &  \underset{\lambda_1,...,\lambda_n \in \Re}{\operatorname{max}} \hspace{0.05in} 
+  \sum \lambda_i K(i,i) - \sum \lambda_i\lambda_j K(i,j) \\
+ & \text{subject to: } \lambda_i \geq 0 , \forall i = 1,..., n\\
+ &\hspace{0.65in}  \sum \lambda_i = 1
+\end{align}
+
+\begin{sub}{9.5}
+\end{sub}
+
+Let $r^*, c^*$ be the dual solution, the optimal sphere is :
+\begin{align}
+||\phi(x) - c^*||^2_\mathcal{H} = {r^*}^2, x \in \text{input space}\\
+where\hspace{0.05in} {r^*}^2 = ||\phi(x_i) - c^*||^2_\mathcal{H} | \hspace{0.05in }\forall i, \lambda_i \neq 0
+\end{align}
+
+\begin{sub}{9.6}
+\end{sub}
+
+The complementary slackness conditions of this problem is that:
+\begin{align}
+ \lambda_i^*(||\phi(x_i) - c^*||_{\mathcal{H}}^2 - {r^*}^2) = 0, \forall i = 1,...,n
+\end{align}
+The support vectors are $x_i's$ that $||\phi(x_i) - c^*||_{\mathcal{H}}^2 - {r^*}^2 = 0$
+
+\begin{sub}{9.7}
+\end{sub}
+For the training data $x_i$, it's a 'novel' instance if $||\phi(x_i) - c^*||^2_\mathcal{H} = {r^*}^2 $(or $x_i$ is a support vector).\\
+For testing data $x_i$, it's a 'novel' instance if  $||\phi(x_i) - c^*||^2_\mathcal{H} \geq {r^*}^2 $(or lies outside the sphere)
+
+
+\begin{sub}{9.8}
+\end{sub}
+If we allow some data to lie outside the sphere:
+\begin{align}
+&Min \hspace{0.05in} r^2 + k \sum \xi_i \\
+&s.t. \hspace{0.1in}||\phi(x_i) - c||_{\mathcal{H}}^2 \leq r^2 + \xi_i\hspace{0.05in} ,\forall i\\
+& \hspace{0.3in}\xi_i \geq 0 ,\forall i
+\end{align}
+The new Lagrangian is :
+\begin{align}
+L(c,r,\xi_i,\lambda_i,\beta_i) &= r^2+  k \sum \xi_i  + \sum \lambda_i(||\phi(x_i) - c||_{\mathcal{H}}^2 - r^2 - \xi_i) - \sum \beta_i \xi_i\\
+\frac{\partial L}{\partial r} &= 2r -2r \sum \lambda_i= 0 \\
+\frac{\partial L}{\partial c} &= \sum -2 \lambda_i (\phi(x_i) - c) = 0 \\
+\frac{\partial L}{\partial \xi_i} &= k - \lambda_i - \beta_i = 0
+\end{align}
+Then 
+\begin{align}
+L =  \sum \lambda_i(||\phi(x_i) - c||_{\mathcal{H}}^2 + \sum \xi_i(k - \lambda_i - \beta_i) =  \sum \lambda_i ||\phi(x_i) - c||_{\mathcal{H}}^2 
+\end{align}
+From (61) we know, $\lambda_i = k - \beta_i \leq k $\\
+Our dual problem is :
+\begin{align}
+ &  \underset{\lambda_1,...,\lambda_n \in \Re}{\operatorname{max}} \hspace{0.05in} 
+ \sum \lambda_i K(i,i) - \sum \lambda_i\lambda_j K(i,j) \\
+ & \text{subject to: } 0\leq \lambda_i \leq k , \forall i = 1,..., n\\
+ &\hspace{0.65in}  \sum \lambda_i = 1
+\end{align}
+
+
 
 
 
@@ -620,4 +788,3 @@ g(\lambda) = \underset{w}{\operatorname{inf}} L(w,\lambda) = \underset{w}{\opera
 
 
 \end{document}
-
