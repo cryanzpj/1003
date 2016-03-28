@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.23)  28 MAR 2016 11:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.23)  28 MAR 2016 16:41
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1047,25 +1047,53 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 161.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./as5.
-aux) ) 
+{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+\openout4 = `as5.pyg'.
+
+
+(./_minted-as5/1A1E9B232B782BD6EA69A03F3232AA0F9D6A6F6F15D23310A9855EAF3B085AA9
+.pygtex
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 2.
+)
+\openout4 = `as5.pyg'.
+
+
+(./_minted-as5/EF176DD2A60F35F03154782BF9F7CE629D6A6F6F15D23310A9855EAF3B085AA9
+.pygtex [2]) <2_1_2.png, id=20, 1089.8316pt x 699.5736pt>
+File: 2_1_2.png Graphic file (type png)
+ <use 2_1_2.png>
+Package pdftex.def Info: 2_1_2.png used on input line 243.
+(pdftex.def)             Requested size: 542.025pt x 347.92854pt.
+
+Overfull \hbox (72.27pt too wide) in paragraph at lines 243--244
+[][] 
+ []
+
+runsystem(rm "as5.pyg")...executed.
+
+[3 <./2_1_2.png>] (./as5.aux) ) 
 Here is how much of TeX's memory you used:
- 17836 strings out of 493033
- 344596 string characters out of 6134139
- 436809 words of memory out of 5000000
- 21013 multiletter control sequences out of 15000+600000
- 10012 words of font info for 38 fonts, out of 8000000 for 9000
+ 17873 strings out of 493033
+ 345641 string characters out of 6134139
+ 440946 words of memory out of 5000000
+ 21038 multiletter control sequences out of 15000+600000
+ 12624 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,6n,66p,820b,237s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12
-.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.p
-fb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on as5.pdf (1 page, 55333 bytes).
+ 55i,11n,66p,820b,430s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmsy10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmti12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmtt10.pfb>
+Output written on as5.pdf (3 pages, 205957 bytes).
 PDF statistics:
- 31 PDF objects out of 1000 (max. 8388607)
- 22 compressed objects within 1 object stream
+ 52 PDF objects out of 1000 (max. 8388607)
+ 36 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 18 words of extra memory for PDF output out of 10000 (max. 10000000)
 
