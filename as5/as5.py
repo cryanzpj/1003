@@ -87,7 +87,7 @@ for a in xrange(1, 21):
 
             clf = DecisionTreeClassifier(max_depth=a, min_samples_leaf=b, min_samples_split=c).fit(X, y)
 
-            training_error = np.sum(np.equal(clf.predict(X_train), 1 - y_train)) / float(y_train.shape[0])
+            #training_error = np.sum(np.equal(clf.predict(X_train), 1 - y_train)) / float(y_train.shape[0])
             testing_error = np.sum(np.equal(clf.predict(X_test_temp), 1 - y_test)) / float(y_test.shape[0])
             if testing_error < min_error:
                 min_error = testing_error
@@ -101,6 +101,7 @@ y_test = np.array([-1 if i == 0 else 1 for i in y_test])
 
 
 def AdaBoost(X, y,n_round=5,test_x = None,test_y= None,visual = False):
+
     n_instance = X.shape[0]
     w = np.ones(n_instance) / n_instance
     models = np.zeros(n_round,dtype = object)
@@ -110,6 +111,7 @@ def AdaBoost(X, y,n_round=5,test_x = None,test_y= None,visual = False):
     mean = X.mean(axis=0)
     std = X.std(axis=0)
     X = (X - mean) / std
+    
 
     for n in xrange(1, n_round + 1):
         W = np.sum(w)
