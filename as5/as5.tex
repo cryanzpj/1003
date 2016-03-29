@@ -242,7 +242,57 @@ plt.show()
 
 \includegraphics[width = 7.5in]{2_1_2.png}
 
+From the plot we can see that, the decision surface has very little change after max depth = 6.
 
 
+\begin{sub}{2.1.3}
+\end{sub}
+
+\begin{center}
+\includegraphics[width = 4in]{2_1_3}
+\end{center}
+
+From the plot we see that the model is clearly over-fitting for large max depths. For max depth greater than 6 the testing error is increasing.  
+
+\begin{sub}{2.1.4}
+\end{sub}
+
+\begin{minted}{python}
+min_error = 1
+ite = 0
+for a in xrange(1, 21):
+    for b in xrange(1, 21):
+        for c in xrange(1, 21):
+            idx = np.arange(X_train.shape[0])
+            np.random.seed(1)
+            np.random.shuffle(idx)
+            X = X_train[idx]
+            y = y_train[idx]
+
+            mean = X.mean(axis=0)
+            std = X.std(axis=0)
+            X = (X - mean) / std
+            #normalize testing data
+            X_test_temp = (X_test -mean)/std
+
+            clf = DecisionTreeClassifier(max_depth=a, min_samples_leaf=b,
+            		 min_samples_split=c).fit(X, y)
+
+            testing_error = np.sum(np.equal(clf.predict(X_test_temp), 1 - y_test)) /
+            		 float(y_test.shape[0])
+            if testing_error < min_error:
+                min_error = testing_error
+                par = [a, b, c]
+            ite += 1
+>>> min_error
+>>> 0.1111111111111
+>>> par
+>>> [10, 11, 1]
+\end{minted}
+I searched max depth, min samples leaf, min samples split from 1 to 20, the best testing error is  0.1111111111111, and the corresponding parameters are 10,11 and 1
+
+\section{3 Ada Boost}
+\begin{problem}{3.1 Implementation}
+\end{problem}
 
 \end{document}
