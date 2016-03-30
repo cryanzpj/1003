@@ -101,7 +101,7 @@ y_test = np.array([-1 if i == 0 else 1 for i in y_test])
 
 
 def AdaBoost(X, y,n_round=5,test_x = None,test_y= None,visual = False):
-
+    '''
     :param nd-array X: Training data
     :param 1d-array y: Training labels
     :param int n_round: Number of rounds default = 5
@@ -109,7 +109,8 @@ def AdaBoost(X, y,n_round=5,test_x = None,test_y= None,visual = False):
     :param 1d-array test_y: Testing labels default None
     :param Boolean visual: True for visualize default None
     :return: trainining error/ testing error of the Final model  
-    
+    '''
+
     n_instance = X.shape[0]
     w = np.ones(n_instance) / n_instance
     models = np.zeros(n_round,dtype = object)
