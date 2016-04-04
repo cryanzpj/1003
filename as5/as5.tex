@@ -242,7 +242,7 @@ plt.show()
 
 \includegraphics[width = 7.5in]{2_1_2.png}
 
-From the plot we can see that, the decision surface has very little change after max depth = 6.
+From the plot we can see that, the decision surface has very little change after max depth = 6. Most of the misclassification occurs at the center. 
 
 
 \begin{sub}{2.1.3}
@@ -503,4 +503,100 @@ F = (1-\pi(x)) &(1+f(x)) +   \pi(x) (1-f(x))  \\
 For $\pi(x)\leq \frac{1}{2}$, $\frac{\partial F}{\partial f} \geq 0 $, the function is increasing, then we choose $f^*(x) = -1$ \\
 For $\pi(x)\geq \frac{1}{2}$, $\frac{\partial F}{\partial f} \leq 0 $, the function is decreasing, then we choose $f^*(x) = 1$ \\
 From above it's equivalent to $f^*(x) = sign(\pi(x)-\frac{1}{2})$
+
+\section{6 AdaBoost Actually Works}
+\begin{problem}{Exponential Bound on the training loss}
+\end{problem}
+\begin{sub}{6.1}
+\end{sub}
+for any function g into \{-1, +1\}\\
+If $g(x) \neq y, yg(x) = -1, exp(-yg(x)) = e^{-1}, I(g(x) \neq y) = 1 < exp(1)$\\
+If $g(x) = y, yg(x) = 1, exp(-yg(x)) = e^{1}, I(g(x) \neq y) = 0 < exp(-1)$\\
+Therefore, $ I(g(x) \neq y) < exp(-yg(x))$   \\
+
+\begin{sub}{6.2}
+\end{sub}
+$L(G,D) = \frac{1}{n} \sum I(G(x_i) \neq y_i)$\\
+From 6.1, $ I(G(x_i) \neq y_i) < exp(-y_iG(x_i)) = exp(-y_if_t(x_i))$\\
+Therefore, $L(G,D) = \frac{1}{n} \sum I(G(x_i) \neq y_i) < \frac{1}{n} \sum exp(-y_if_t(x_i)) = Z_T $
+
+\begin{sub}{6.3}
+\end{sub}
+\begin{align}
+w_i^{t+1} &= w_i^t exp(-\alpha_t y_i G_t(x_i))\\
+&= exp(y_i\sum_{s=1}^{t}-\alpha_s G_s(x_i))\\
+&= exp(-y_i f_t(x_i))
+\end{align}
+
+
+\begin{sub}{6.4}
+\end{sub}
+\begin{align}
+\frac{Z_{t+1}}{Z_t} &= \frac{\frac{1}{n} \sum_{i=1}^{n} exp(-y_if_{t+1}(x_i))}{\frac{1}{n} \sum_{i=1}^{n} exp(-y_if_{t}(x_i))} \\
+& = \frac{\sum w_i^{t+2}}{\sum w_i^{t+1}}\\
+& = \frac{\sum w_i^{t+1} exp(-\alpha_{t+1} y_i G_{t+1}(x_i))}{\sum w_i^{t+1}} \\
+& = \frac{\sum_{y_i = G_{t+1}(x_i)} w_i^{t+1} exp(-\alpha_{t+1}) + \sum_{y_i \neq G_{t+1}(x_i)} w_i^{t+1} exp(\alpha_{t+1}) }{\sum w_i^{t+1}} \\
+&= (1- err_{t+1}) e^{-\alpha_{t+1}} + err_{t+1} e^{\alpha_{t+1}}\\
+&= (1- err_{t+1}) e^{-\frac{1}{2} log(\frac{1- err_{t+1}}{err_{t+1}})} +err_{t+1} e^{-\frac{1}{2} log(\frac{1- err_{t+1}}{err_{t+1}})   }\\
+& = 2\sqrt{ err_{t+1}(1- err_{t+1})} 
+\end{align}
+
+\begin{sub}{6.5}
+\end{sub}
+$g(a) = a(1-a)$, $g'(a) = 1-2a >0$ for $a \in [0, \frac{1}{2}] $, so g is monotonically increasing on $[0, \frac{1}{2}]$\\
+$h(a) = exp(-a)+a -1, h'(a) = -ae^{-a} +1 \geq 0$ for $a \in [0, \frac{1}{2}] $, $h(a) \geq h(0) = 0$, so $1 - a \leq exp(-a)$\\
+From 6.4  $\frac{Z_{t+1}}{Z_t} = 2\sqrt{ err_{t+1}(1- err_{t+1})} $, we know $err_{t+1} \leq \frac{1}{2}- \gamma $:
+\begin{align}
+\frac{Z_{t+1}}{Z_t}  \leq 2 \sqrt{(\frac{1}{2}- \gamma)(\frac{1}{2}+ \gamma)} =  \sqrt{1 - 4\gamma^2}\\
+1- 4 \gamma^2 \leq e^{-4\gamma^2}, \sqrt{1 - 4\gamma^2} \leq e^{-2\gamma^2}\\
+\end{align}
+Therefore:
+$$\frac{Z_{t+1}}{Z_t}  \leq  e^{-2\gamma^2}$$
+
+\begin{sub}{6.6}
+ \begin{align}
+ Z_{t+1} = \frac{Z_{t+1}}{Z_t}  \frac{Z_{t}}{Z_{t-1}} ... \leq  e^{-2t\gamma^2}
+ \end{align}
+Therefore the error has exponential decay.	
+\end{sub}
+
+\section{7 AdaBoost is FSAM With Exponential Loss}
+\begin{sub}{7.1}
+\end{sub}
+Since $ L(y,f(x)) = exp(-yf(x))$
+\begin{align}
+	  (\alpha_t,G_t) &=  \underset{\alpha, G}{\operatorname{arg min}} \sum_{i=1}^n e^{-y_i(f_{t-1}(x_i)+\alpha G(x_i))}\\
+	  &= \underset{\alpha, G}{\operatorname{arg min}} \sum_{i=1}^n e^{-y_if_{t-1}(x_i)}e^{-y_i\alpha G(x_i)}\\
+	  &= \underset{\alpha, G}{\operatorname{arg min}} \sum_{i=1}^n w_i^te^{-y_i\alpha G(x_i)}
+\end{align} 
+
+\begin{sub}{7.2}
+\end{sub}
+For fixed positive alpha:
+\begin{align}
+G_t &= \underset{G}{\operatorname{arg min}} \sum_{y_i = G(x_i)} w_i^te^{-\alpha} +  \sum_{y_i \neq G(x_i)} w_i^te^{\alpha}\\
+&=  \underset{G}{\operatorname{arg min}}e^{-\alpha} \sum_{y_i = G(x_i)} w_i^t + e^{\alpha} \sum_{y_i \neq G(x_i)} w_i^t\\
+& =  \underset{G}{\operatorname{arg min}} e^{-\alpha}  \sum_{i=1}^n w_i^t + (e^{\alpha} - e^{-\alpha}) \sum_{y_i \neq G(x_i)} w_i^t
+\end{align}
+Since $e^{-\alpha},e^{\alpha}$ are positive constant, $e^{\alpha} - e^{-\alpha} >0$:\\
+$$G_t =  \underset{G}{\operatorname{arg min}} \sum_{y_i \neq G(x_i)} w_i^t = \underset{G}{\operatorname{arg min}} \sum_{i=1}^n  w_i^t I(G(x_i) \neq y_i)$$
+
+\begin{sub}{7.3}
+\end{sub}
+\begin{align}
+\alpha_t &= \underset{\alpha}{\operatorname{arg min}} \sum_{i=1}^n w_i^te^{-y_i\alpha G_t(x_i)}\\
+&= \underset{\alpha}{\operatorname{arg min}} \sum_{y_i = G_t(x_i)} w_i^te^{-\alpha} +  \sum_{y_i \neq G_t(x_i)} w_i^t e^{\alpha}\\
+& = \underset{\alpha}{\operatorname{arg min}} \hspace{0.05in} err_t \hspace{0.05in} e^{ \alpha} + (1-err_t)e^{ -\alpha}\end{align}
+\begin{align}
+\frac{\partial }{\partial \alpha } err_t \hspace{0.05in} e^{ \alpha} + (1-err_t)e^{ -\alpha}   &= err_t \hspace{0.05in} e^{ \alpha} - (1-err_t)e^{ -\alpha} = 0\\
+e^{2\alpha} = & \frac{1-err_t}{err_t}\\
+\alpha = \frac{1}{2}& log(\frac{1-err_t}{err_t})
+\end{align}
+
+
+
+
+
+
+
 \end{document}
