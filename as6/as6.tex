@@ -1,0 +1,338 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{minted}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usetikzlibrary{automata,positioning}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+%
+% Basic Document Settings
+%
+
+
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{\hmwkClass\ (\hmwkClassInstructor): \hmwkTitle}
+\chead{\hspace{4.8in}\hmwkAuthorName}
+\rhead{\firstxmark}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+%
+% Create Problem Sections
+%
+
+\newcommand{\enterProblemHeader}[1]{
+    \nobreak\extramarks{}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+}
+
+\newcommand{\exitProblemHeader}[1]{
+    \nobreak\extramarks{Problem \arabic{#1} (continued)}{Problem \arabic{#1} continued on next page\ldots}\nobreak{}
+    \stepcounter{#1}
+    \nobreak\extramarks{Problem \arabic{#1}}{}\nobreak{}
+}
+
+\setcounter{secnumdepth}{0}
+\newcounter{partCounter}
+
+
+%
+% Homework Problem Environment
+%
+% This environment takes an optional argument. When given, it will adjust the
+% problem counter. This is useful for when the problems given for your
+% assignment aren't sequential. See the last 3 problems of this template for an
+% example.
+%
+
+
+%
+% Homework Details
+%   - Title
+%   - Due date
+%   - Class
+%   - Section/Time
+%   - Instructor
+%   - Author
+%
+
+\newcommand{\hmwkTitle}{Homework 6}
+\newcommand{\hmwkDueDate}{Monday, April 11, 2016}
+\newcommand{\hmwkClass}{DS-GA 1003}
+\newcommand{\hmwkClassInstructor}{Professor David Ronsenberg}
+\newcommand{\hmwkAuthorName}{Yuhao Zhao}
+\newcommand{\hmwknetid}{Yz3085}
+\newcommand{\hmwksubtitle}{Generalized Hinge Loss and Multiclass SVM}
+\newcommand{\gihub}{See complete code at: \textit{git@github.com:cryanzpj/1003.git}}
+%
+% Title Page
+%
+
+\title{
+    \vspace{2in}
+    \textmd{\textbf{\hmwkClass:\ \hmwkTitle \\ \hmwksubtitle }}\\
+    \vspace{1in}
+    \normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+    \vspace{0.1in}\large{\textit{\hmwkClassInstructor}}\\
+    \vspace{3in}
+    \author{\textbf{\hmwkAuthorName} \\ \textbf{\hmwknetid }\\ }
+    \vspace{0.2in}
+    \gihub
+}
+
+
+
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+% For derivatives
+\newcommand{\deriv}[1]{\frac{\mathrm{d}}{\mathrm{d}x} (#1)}
+
+% For partial derivatives
+\newcommand{\pderiv}[2]{\frac{\partial}{\partial #1} (#2)}
+
+% Integral dx
+\newcommand{\dx}{\mathrm{d}x}
+
+% Alias for the Solution section header
+\newcommand{\solution}{\textbf{\large Solution}}
+
+% Probability commands: Expectation, Variance, Covariance, Bias
+\newcommand{\E}{\mathrm{E}}
+\newcommand{\Var}{\mathrm{Var}}
+\newcommand{\Cov}{\mathrm{Cov}}
+\newcommand{\Bias}{\mathrm{Bias}}
+
+
+
+
+
+\newenvironment{problem}[2][$\bullet$]{\begin{trivlist}\large
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}  {\end{trivlist}}
+
+\newenvironment{sub}[2][$-$]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}  {\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{question}[2][Question]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+
+
+\section{2. Convex Surrogate Loss Function }
+
+\begin{problem}{2.1 Hinge loss is a convex surrogate for 0/1 loss}
+\end{problem}
+
+\begin{sub}{2.1.1}
+\end{sub}
+i) if $y \neq sign(f(x)), yf(x) \leq 0, 1-yf(x) \geq 1 = I(y \neq sign(f(x)))$.\\ Therefore, $I (y \neq sign(f(x))) \leq max\{0, 1-yf(x)\}$\\
+ii) if $y = sign(f(x)), I(y \neq sign(f(x))) = 0, max\{0, 1-yf(x)\} \geq 0$.\\ 
+Therefore, $I (y \neq sign(f(x))) \leq max\{0, 1-yf(x)\}$
+
+\begin{sub}{2.1.2}
+\end{sub}
+Since $f_1(m) = 0$ is convex , $f_2(m) = 1-m$ is an affine function and thus convex. \\
+Since the point-wise maximum of convex functions is also convex, $max\{f_1,f_2 \} = max\{0,1-m\}$ is a convex function of the margin m.
+
+\begin{sub}{2.1.3}
+\end{sub} 
+$f_1(m) = 0$ is convex, we need to show $f_2 = 1 - yw^Tx$ is convex.\\
+It's sufficient to show $f_2$ is affine. For $\forall w_1, w_2$ and $\alpha \in [0,1]$:
+\begin{align}
+\alpha f_2(w_1) + (1-\alpha) f_2(w_2) &= \alpha (1 - yw_1^Tx) + (1-\alpha) (1- yw_2^Tx)\\
+& = 1 - y(\alpha w_1^T + (1-\alpha)w_2^T)x \\ & = f(\alpha w_1 + (1 -\alpha) w_2
+\end{align}
+Therefore $f_2$ is affine w.r.t w and thus convex, and $max\{f_1, f_2\} = max\{0, 1-yw^Tx \}$ is a convex function of w. 
+
+\begin{problem}{2.2 Multiclass Hinge Loss}
+\end{problem}
+\begin{sub}{2.2.1}
+\end{sub}
+Since $f(x) = \underset{y \in \mathcal{Y}}{\operatorname{arg max \hspace{0.05 in}}} h(x,y)$, f(x) is the y that max h, by definition:
+\begin{align}
+h(x,f(x)) \leq h(x,y)   \hspace{0.5in} \text{for } \forall x \in  \mathcal{X}, y \in  \mathcal{Y}
+\end{align}
+
+\begin{sub}{2.2.2}
+\end{sub}
+Since from 2.2.1, $h(x,f(x)) - h(x,y) \leq 0$:
+\begin{align}
+\Delta(y,f(x)) &\leq  \Delta(y,f(x))   +h(x,f(x)) - h(x,y) \\
+&\leq \underset{y' \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  \Delta(y,y')   +h(x,y') - h(x,y)\\
+& =\ell(h,(x,y))
+\end{align}
+
+\begin{sub}{2.2.3}
+\end{sub}
+For $\mathcal{H} = \{h_w(w,\Psi(x,y)) | w\in R^d \}$:
+\begin{align}
+\ell(h_w,(x_i,y_i)) &= \underset{y \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  \Delta(y_i,y)   +h_w(x_i,y) - h_w(x_i,y_i)\\
+&= \underset{y \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  \Delta(y_i,y)   +\langle w, \Psi(x_i,y) \rangle- \langle w, \Psi(x_i,y_i) \rangle\\
+& = \underset{y \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  \Delta(y_i,y)   +\langle w, \Psi(x_i,y) - \Psi(x_i,y_i) \rangle
+\end{align}
+
+
+\begin{sub}{2.2.4}
+\end{sub}
+
+Let $f(w) = \Delta(y_i,y)   +\langle w, \Psi(x_i,y) - \Psi(x_i,y_i) \rangle$, for $\forall w_1,w_2 \in R^d$ and $\alpha \in [0,1]:$
+\begin{align}
+\alpha f(w_1) + (1-\alpha)f(w_2)=&\alpha( \Delta(y_i,y)   +\langle w_1, \Psi(x_i,y) - \Psi(x_i,y_i)\rangle \\&+ (1- \alpha)( \Delta(y_i,y)   +\langle w_2, \Psi(x_i,y) - \Psi(x_i,y_i)\rangle\\
+&=  \Delta(y_i,y)   +\langle \alpha w_1, \Psi(x_i,y) - \Psi(x_i,y_i)\rangle + \langle (1-\alpha) w_2, \Psi(x_i,y) - \Psi(x_i,y_i)\rangle\\
+&=  \Delta(y_i,y)  + \langle \alpha w_1 + (1 -\alpha) w_2, \Psi(x_i,y) - \Psi(x_i,y_i)\rangle \\
+ &= f(\alpha w_1 + (1-\alpha) w_2)
+\end{align}
+Therefore, $f(w)$ is an affine function of $w$, thus convex.\\
+let $f_j (w)= \Delta(y_i,y'_j)   +\langle w, \Psi(x_i,y'_j) - \Psi(x_i,y_i)\rangle$, which $y'_j =j, j \in \{1,2,...,k\}, f_j$ is convex:
+\begin{align}
+\underset{y \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}} \Delta(y_i,y)   +\langle w, \Psi(x_i,y) - \Psi(x_i,y_i) \rangle = max\{f_1, f_2 ,...,f_k\}
+\end{align}
+LHS is the point-wise maximum of k convex convex functions, thus is convex. 
+
+\begin{sub}{2.3.5}
+\end{sub}
+In 2.2.4 we showed that $\ell(h_w,(x_i,y_i))$ is convex, and in 2.2.2/2.2.3 we showed  $\ell(h_w,(x_i,y_i))$ is an upper bound of $\Delta(y_i,f_w(x_i))$, which is our loss function of interest. Therefore, by definition, $\ell(h_w,(x_i,y_i))$ is a convex surrogate for $\Delta(y_i,f_w(x_i))$ 
+
+\section{3 Hinge Loss is a Special Case of Generalized Hinge Loss}
+$\ell(h,(x,y)) =  \underset{y' \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  \Delta(y,y')   +h(x,y') - h(x,y),$ where $\Delta(y,\hat{y}) = I(y \neq \hat{y})$.\\
+Since $h(x,y)$ in our case is constant, and $y in \{1,-1\}$:
+\begin{align}
+\ell(h,(x,y)) &=  \underset{y' \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  \Delta(y,y')   +h(x,y') - h(x,y) \\&= \underset{y' \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  \Delta(y,y')   +h(x,y')\\
+&= max\{I(y\neq 1) + h(x,1), I(y\neq -1)+ h(x,-1) \}\\
+& = max\{I(y\neq 1) + \frac{g(x)}{2}, I(y\neq -1)-\frac{g(x)}{2} \}
+\end{align}
+If $y = 1$, eqn(20) becomes: 
+\begin{align}
+max\{  \frac{g(x)}{2}, 1 -\frac{g(x)}{2} \} = max\{0,1-g(x)\} = max\{0, 1-yg(x)\}
+\end{align}
+if $y = -1$, eqn(20) becomes:
+\begin{align}
+max\{ 1+ \frac{g(x)}{2},  -\frac{g(x)}{2} \} = max\{1+g(x),0\} = max\{ 1-yg(x),0\}
+\end{align}
+Therefore, in binary case:
+$$\ell(h,(x,y))  = max\{ 0, 1-yg(x)\}$$
+
+\section{4 Another Formulation of Generalized Hinge Loss}
+\begin{sub}{4.1}
+\end{sub}
+\begin{align}
+\ell(h,(x_i,y_i)) &=  \underset{y' \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  \Delta(y_i,y')   +h(x_i,y') - h(x_i,y_i)\\
+&= \underset{y' \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  \Delta(y_i,y')   - ( h(x_i,y_i) -h(x_i,y'))\\
+&= \underset{y' \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  \Delta(y_i,y')   - m_{i,y'}(h)
+\end{align}
+
+\begin{sub}{4.2}
+\end{sub}
+From 2.2.2 we know that $\ell(h,(x,y)) \geq \Delta(y,f(x))$. If we assume $\Delta(y,y') \geq 0$ for $\forall y,y' \in \mathcal{Y}$:
+$$\ell(h,(x,y)) \geq \Delta(y,f(x)) \geq 0$$
+Thus, $(\Delta(y_i,y)   - m_{i,y}(h),0)_+ =max \{\Delta(y_i,y)   - m_{i,y}(h),0\} = \Delta(y_i,y)   - m_{i,y}(h)$\\ 
+Therefore:
+$$\underset{y \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  (\Delta(y_i,y)   - m_{i,y}(h),0)_+ = \underset{y \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}} (\Delta(y_i,y)   - m_{i,y}(h))$$
+
+\begin{sub}{4.3}
+\end{sub}
+We assume that $m_{i,y} (h) = h(x_i,y_i) - h(x_i,y) \geq \Delta(y_i,y) ,\forall y \neq y_i$ and $\Delta(y,y) = 0$\\
+For $\forall y_j \neq y_i$:
+\begin{align}
+\Delta(y_i,y_j)-m_{i,y_j}(h) \leq 0\\
+(\Delta(y_i,y_j)-m_{i,y_j}(h))_+ = 0
+\end{align}  
+For $y = y_i$:
+\begin{align}
+\Delta(y_i,y)-m_{i,y}(h) =0 - 0 = 0
+\end{align}  
+Therefore:
+ \begin{align}
+\ell(h,(x,y)) &= \underset{y' \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}}  (\Delta(y_i,y')   - m_{i,y'}(h))_+ = 0
+ \end{align}
+
+\section{5. SGD for Multiclass SVM}
+\begin{sub}{5.1}
+\end{sub}
+a) In 2.2.4 we should that $w \mapsto \underset{y \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}} \Delta(y_i,y)   +\langle w, \Psi(x_i,y) - \Psi(x_i,y_i) \rangle $ is a convex funtion. \\
+Then it's obvious that $\frac{1}{n} \sum_{i=1}^{n}\underset{y \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}} \Delta(y_i,y)   +\langle w, \Psi(x_i,y) - \Psi(x_i,y_i) \rangle $ is a convex function of w since it's a constant times the sum of n convex functions. \\
+
+b) Let $f(w) = ||w||^2$, for $\forall w_1, w_2 \in R^d, \alpha \in [0,1]$
+\begin{align}
+f(\alpha w_1 + (1 - \alpha) w_2) = ||\alpha w_1 + (1 - \alpha) w_2||^2 \leq  \alpha^2|| w_1||^2 + (1-\alpha)^2|| w_2||^2
+\end{align}
+Since $\alpha, (1-\alpha) \leq 1$ we have $\alpha^2 \leq \alpha$ and  $(1-\alpha)^2 \leq 1-\alpha$
+$$\text{RHS of enq (30)} \leq \alpha|| w_1||^2 + (1-\alpha)|| w_2||^2 = \alpha f(w_1) + (1 - \alpha) f(w_2)$$
+Therefore, $||w||^2$ is convex function of $w$.\\
+
+c) $J(w) = \lambda ||w||^2 + \frac{1}{n} \sum_{i=1}^{n}\underset{y \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}} \Delta(y_i,y)   +\langle w, \Psi(x_i,y) - \Psi(x_i,y_i) \rangle $ is convex since it's a sum of convex functions. 
+
+\begin{sub}{5.2}
+\end{sub}
+From homework 3 Q2.1:\\
+
+\textit{Suppose $f_1,...,f_m$ are functions and f(x) = 	$\underset{i = 1,...,m}{\operatorname{max \hspace{0.05 in}}} f_i(x)$, let k be the index that $f_k(x)= f(x)$, if we choose $g \in \partial f_k(x), g\in \partial f(x)$}\\
+
+Let $\hat{y}_i = \underset{y \in \mathcal{Y}}{\operatorname{argmax \hspace{0.05 in}}} \Delta(y_i,y)   +\langle w, \Psi(x_i,y) - \Psi(x_i,y_i) \rangle  $, if we choose $g_i \in \partial \Delta(y_i,\hat{y_i})   +\langle w, \Psi(x_i,\hat{y_i}) - \Psi(x_i,y_i) \rangle,\\ \text{we also have } g_i \in  \partial \hspace{0.05in} \underset{y \in \mathcal{Y}}{\operatorname{max \hspace{0.05 in}}} \Delta(y_i,y)   +\langle w, \Psi(x_i,y) - \Psi(x_i,y_i) \rangle $\\
+Therefore we can choose $g_i = \Psi(x_i,\hat{y}_i) - \Psi(x_i,y_i) $\\
+One subgradient for $J(w)$ is :
+\begin{align}2\lambda w + \frac{1}{n} \sum_{i=1}^{n}  \Psi(x_i,\hat{y_i}) - \Psi(x_i,y_i) \end{align}
+
+\begin{sub}{5.3}
+\end{sub}
+The stochastic subgradient based on $(x_i,y_i)$ is:
+\begin{align}
+2\lambda w +  \Psi(x_i,\hat{y_i}) - \Psi(x_i,y_i) 
+\end{align}
+
+\begin{sub}{5.4}
+\end{sub}
+The minibatch subgradient based on m data points $(x_i,y_i),..., (x_{i+m-1}, y_{i+m-1})$ is:\\
+\begin{align}
+2\lambda w + \frac{1}{m}  \sum_{j=0}^{m-1}  \Psi(x_{i+j},\hat{y}_{i+j}) - \Psi(x_{i+j},y_{i+j})
+\end{align}
+ 
+
+
+
+\end{document}
