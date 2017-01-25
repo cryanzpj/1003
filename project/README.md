@@ -1,6 +1,7 @@
 # E-Commerce Recommender Modeling :A case study of Ponpare Coupon Purchase prediction
 
 Author: Hao Liu,Yuhao Zhao
+
 Project Advisor: Kurt Miller
 
 ## Introduction
