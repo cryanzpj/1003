@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}}\PYGdefault{n}{current} \PYGdefault{o}{=} \PYGdefault{n}{time}\PYGdefault{o}{.}\PYGdefault{n}{time}\PYGdefault{p}{()}
-\PYGdefault{o}{...}\PYGdefault{n}{compute\PYGdefaultZus{}regularized\PYGdefaultZus{}square\PYGdefaultZus{}loss\PYGdefaultZus{}gradient}\PYGdefault{p}{(}\PYGdefault{n}{X\PYGdefaultZus{}train}\PYGdefault{p}{,}
-\PYGdefault{n}{y\PYGdefaultZus{}train}\PYGdefault{p}{,}\PYGdefault{n}{theta} \PYGdefault{o}{=} \PYGdefault{n}{np}\PYGdefault{o}{.}\PYGdefault{n}{ones}\PYGdefault{p}{(}\PYGdefault{l+m+mi}{49}\PYGdefault{p}{),}\PYGdefault{n}{lambda\PYGdefaultZus{}reg} \PYGdefault{o}{=} \PYGdefault{n}{lambda\PYGdefaultZus{}opt}\PYGdefault{p}{)}
-\PYGdefault{o}{...}\PYGdefault{k}{print} \PYGdefault{p}{(}\PYGdefault{n}{time}\PYGdefault{o}{.}\PYGdefault{n}{time}\PYGdefault{p}{()} \PYGdefault{o}{\PYGdefaultZhy{}} \PYGdefault{n}{current}\PYGdefault{p}{)}
-\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}}\PYGdefault{l+m+mf}{3.02069187164e\PYGdefaultZhy{}05}
-\end{Verbatim}

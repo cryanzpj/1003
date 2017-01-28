@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}} \PYGdefault{n}{compute\PYGdefaultZus{}square\PYGdefaultZus{}loss\PYGdefaultZus{}gradient}\PYGdefault{p}{(}\PYGdefault{n}{x}\PYGdefault{p}{,}\PYGdefault{n}{y}\PYGdefault{p}{,}\PYGdefault{n}{theta}\PYGdefault{p}{)}
-\PYGdefault{o}{\PYGdefaultZgt{}\PYGdefaultZgt{}\PYGdefaultZgt{}} \PYGdefault{n}{array}\PYGdefault{p}{([} \PYGdefault{l+m+mf}{12.} \PYGdefault{p}{,}  \PYGdefault{l+m+mf}{11.5}\PYGdefault{p}{,}  \PYGdefault{l+m+mf}{11.} \PYGdefault{p}{,}  \PYGdefault{l+m+mf}{10.5}\PYGdefault{p}{])}
-\end{Verbatim}
